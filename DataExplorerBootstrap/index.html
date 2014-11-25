@@ -18,13 +18,252 @@
 
     <script src="js/modernizr-2.8.3.min.js"></script>
 </head>
+<style>
+    .btn_block_sm{
+        width: 15%;
+        position: relative;
+        margin: 15% auto;
+    }
+    .section {
+        width: 100%;
+        clear: both;
+        padding-top: 100px;
+        border-bottom: 3px solid black;
+    }
+    .smallsection{
+        width: 100%;
+        margin: 0;
+        max-height: 1333px;
+        height: 1200px;
+        max-width: 2000px;
+    }
+    #startmenu,#menu,#plot{
+        width: 100%;
+        padding-top: 70px;
+        margin: 0 auto;
+        max-width: 2000px;
+        max-height: 1333px;
+    }
+    .table_column{
+        padding-left: 4px;
+        padding-right: 4px;
+        text-align: center;
+    }
+    #data_tables,#data_tables1{
+        padding-bottom: 180px;
+    }
+    .table{
+        width: 65%;
+        border-collapse: collapse;
+        border-spacing: 10px;
+    }
+    #leftmost,#leftmost1{
+        text-align: left;
+        float: left;
+        padding-left: 400px;
+    }
+    #rightmost,#rightmost1,#selectedMenu{
+        text-align: left;
+        float: right;
+        padding-left: 10px;
+    }
+    .checkbox {
+        border: 1px solid black;
+        width: .79em;
+        height: .79em;
+        display: inline-block;
+        padding-left: 8px;
+    }
+
+</style>
 <body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <!-- Add your site or application content here -->
-<p>Hello world! This is HTML5 Boilerplate.</p>
+<div id="startmenu" class="section">
+    <div class="smallsection">
+        <div class="container">
+            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Select Existing </button>
+        </div>
+        <div class="container">
+            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Create </button>
+        </div>
+    </div>
+</div>
+
+<div id="menu" class="section">
+    <div class="smallsection ">
+        <div class="container">
+            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose data </button>
+        </div>
+
+        <div id="data_tables">
+            <div class="table">
+                <div id="leftmost" class="table_column">
+                    <table>
+                        <tr>
+                            <th> Scottish referendum </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Total population </td>
+                            <td valign="top"><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Income domain rank</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Income domain rate</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Income deprived</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table">
+                <div id="rightmost" class="table_column">
+                    <table>
+                        <tr>
+                            <th> Scottish referendum </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>something </td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something more</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something lqlqlqlq</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="data_tables1">
+            <div class="table">
+                <div id="leftmost1" class="table_column">
+                    <table>
+                        <tr>
+                            <th> Scottish referendum </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Total population </td>
+                            <td valign="top"><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Income domain rank</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Income domain rate</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Income deprived</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="table">
+                <div id="rightmost1" class="table_column">
+                    <table>
+                        <tr>
+                            <th> Scottish referendum </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>something </td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                        <tr>
+                            <td>something</td>
+                            <td><div class="checkbox"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose place </button>
+        </div>
+        <div class="container">
+            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose plot </button>
+            <div class="table">
+                <div id="selectedMenu" class="smallsection">
+                    <table>
+                        <tr>
+                            <th>Already selected:</th>
+                        </tr>
+                        <tr>
+                            <td>lqlqlqlqlql</td>
+                        </tr>
+                        <tr>
+                            <td>lqlqlqllqq</td>
+                        </tr>
+                        <tr>
+                            <td>lqlqlqllqq</td>
+                        </tr>
+                        <tr>
+                            <td>lqlqlqllqq</td>
+                        </tr>
+                        <tr>
+                            <td>lqlqlqllqq</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="plot" class="section">
+    <div class="smallsection">Plotting here
+    </div>
+</div>
 
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/bootstrap.js"></script>
