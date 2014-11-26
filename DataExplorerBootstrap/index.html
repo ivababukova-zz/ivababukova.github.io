@@ -44,24 +44,40 @@
         max-width: 2000px;
         max-height: 1333px;
     }
+    .table_column{
+        padding-left: 4px;
+        padding-right: 4px;
+        text-align: center;
+    }
     #data_tables,#data_tables1{
         padding-bottom: 180px;
     }
     .table{
         width: 65%;
         border-collapse: collapse;
-        border-spacing: 10px;
+        border-spacing: 5px 5px;
+    }
+    .selectedBar{
+        width: 40%;
+        text-align: left;
+        max-height: 180px;
     }
     #leftmost,#leftmost1{
         text-align: left;
         float: left;
         padding-left: 400px;
     }
-    #rightmost,#rightmost1,#rightmost2{
+    #rightmost,#rightmost1{
         text-align: left;
         float: right;
         padding-left: 10px;
     }
+    .rightmost2{
+        text-align: left;
+        float: right;
+        padding: 10px;
+    }
+
 
 </style>
 <body>
@@ -73,7 +89,31 @@
 <div id="startmenu" class="section">
     <div class="smallsection">
         <div class="container">
-            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Select Existing </button>
+            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Select existing </button>
+
+                <!-- Default panel contents -->
+                <!-- Table -->
+                <table class="table">
+                    <tr>
+                        <th>#1</th>
+                        <th>#2</th>
+                        <th>#3</th>
+                    </tr>
+                </table>
+                <p><button type="button" class="btn btn-default center-block">More</button></p>
+                <table class = "table">
+                    <tr>
+                        <th>#4</th>
+                        <th>#5</th>
+                        <th>#6</th>
+                    </tr>
+                    <tr>
+                        <th>#7</th>
+                        <th>#7</th>
+                        <th>#8</th>
+                    </tr>
+                </table>
+
         </div>
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Create </button>
@@ -378,96 +418,37 @@
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose place </button>
         </div>
+
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose plot </button>
-            <div class="panel panel-default">
                 <div class="panel-heading">Already selected:</div>
-                <table class="panel panel-default">
-                    <div id="rightmost2" class="table">
-                        <table>
-                            <tr>
-                                <th> Scottish education </th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>something </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <input type="checkbox">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th> Income: </th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>something</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <input type="checkbox">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>something</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <input type="checkbox">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th> Crime: </th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>something</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <input type="checkbox">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>something</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <input type="checkbox">
-                                            </div><!-- /input-group -->
-                                        </div><!-- /.col-lg-6 -->
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </table>
+                    <table class="table selectedBar">
+                        <tr>
+                            <td>Data:</td>
+                        </tr>
+                        <tr>
+                            <td>Places:</td>
+                        </tr>
+                        <tr>
+                            <td>Graph:</td>
+                        </tr>
+                        <tr>
+                            <th><button type="button" class="btn btn-default center-block">Submit</button></th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
+
+
+
     </div>
 </div>
 
 
 <div id="plot" class="section">
-    <div class="smallsection">Plotting here
+    <div class="smallsection">
+
     </div>
 </div>
 
