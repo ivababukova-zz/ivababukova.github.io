@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <!-- Initial Template created from an amalgamation of HTML5 Boilerplate and the Bootstrap template. -->
 
@@ -19,10 +19,33 @@
     <script src="js/modernizr-2.8.3.min.js"></script>
 </head>
 <style>
-    .btn_block_sm{
-        width: 15%;
+    html
+    {
+        height: 100%;
+        width: 100%;
+    }
+    table
+    {
+        margin-left: 27%;
+        width: 70%;
+        
+    }
+    th{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .button-plot{
+        width: 180px;  height: 120px;
+    }
+    .center-center{
+          margin-right: auto;
+        margin-left: auto;
         position: relative;
-        margin: 15% auto;
+    }
+    .btn_block_sm{
+        width: 200px;
+        position: relative;
+        margin: 5% auto;
     }
     .section {
         width: 100%;
@@ -61,21 +84,6 @@
         width: 40%;
         text-align: left;
         max-height: 180px;
-    }
-    #leftmost,#leftmost1{
-        text-align: left;
-        float: left;
-        padding-left: 400px;
-    }
-    #rightmost,#rightmost1{
-        text-align: left;
-        float: right;
-        padding-left: 10px;
-    }
-    .rightmost2{
-        text-align: left;
-        float: right;
-        padding: 10px;
     }
     .image1{
         content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExamplepie.gif");
@@ -117,34 +125,23 @@
     <div class="smallsection">
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Select existing </button>
+            <!-- Default panel contents -->
+            <!-- Table -->
+            <div style="margin: 0 auto; width: 100%; text-align: center;">
+                <button type="button" class="btn btn-default button-plot"><div class="image4"></div></button>​
+                <button type="button" class="btn btn-default button-plot"><div class="image5"></div></button>
+                <button type="button" class="btn btn-default button-plot"><div class="image6"></div></button>
+                <button type="button" class="btn btn-default button-plot"><div class="image7"></div></button>​
+                <button type="button" class="btn btn-default button-plot"><div class="image8"></div></button>
+                <button type="button" class="btn btn-default button-plot"><div class="image9"></div></button>
+            </div>
+            <button type="button" class="btn btn-default btn_block_sm center-block">More</button></td>
 
-                <!-- Default panel contents -->
-                <!-- Table -->
-                <table class="table center-block">
-                    <tr>
-                        <th><button type="button" class="btn btn-default"><div class="image1"></div></button>​</th>
-                        <th><button type="button" class="btn btn-default"><div class="image2"></div></button></th>
-                        <th><button type="button" class="btn btn-default"><div class="image3"></div></button></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th><button type="button" class="btn btn-default center-block">More</button></th>
-                        <th></th>
-                    </tr>
-                </table>
-
-                <table class = "table center-block">
-                    <tr>
-                        <th><button type="button" class="btn btn-default"><div class="image4"></div></button>​</th>
-                        <th><button type="button" class="btn btn-default"><div class="image5"></div></button></th>
-                        <th><button type="button" class="btn btn-default"><div class="image6"></div></button></th>
-                    </tr>
-                    <tr>
-                        <th><button type="button" class="btn btn-default"><div class="image7"></div></button>​</th>
-                        <th><button type="button" class="btn btn-default"><div class="image8"></div></button></th>
-                        <th><button type="button" class="btn btn-default center-block"><div class="image9"></div></button></th>
-                    </tr>
-                </table>
+            <div style="margin: 0 auto; width: 100%; text-align: center;">
+                <button type="button" class="btn btn-default button-plot"><div class="image1"></div></button>​
+                <button type="button" class="btn btn-default button-plot"><div class="image2"></div></button>
+                <button type="button" class="btn btn-default button-plot"><div class="image3"></div></button>
+            </div>
         </div>
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Create </button>
@@ -156,367 +153,38 @@
     <div class="smallsection ">
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose data </button>
-        </div>
 
-        <div id="data_tables">
-            <div class="table">
-                <div id="leftmost" class="table_column">
-                    <table>
-                        <tr>
-                            <th> Income </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>Total population </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Income rank 2012</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Income rate 2012</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Number of income deprived</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="table">
-                <div id="rightmost" class="table_column">
-                    <table>
-                        <tr>
-                            <th> Crime </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>rank 2012 </td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>count 2012</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>rate per 10 000 people</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>police force area</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div id="data_tables1">
-            <div class="table">
-                <div id="leftmost1" class="table_column">
 
                     <table>
-                        <tr>
-                            <th> Scottish referendum </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>Electorate</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Number of voters</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Yes voters</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>No voters</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>rejected papers</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>population</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>number of males</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>number of females</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>area(square km)</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>population density</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>council expenditure(£)</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                        <tr><th>Income</th><th>Crime</th></tr>
+                        <tr><td><input type="checkbox" value="option1"> Total population</td>
+                            <td><input type="checkbox" value="option1"> rank 2012</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> Income rank 2012</td>
+                            <td><input type="checkbox" value="option1"> count 2012</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> Income rate 2012</td>
+                            <td><input type="checkbox" value="option1"> rate per 10 000 people</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> Number of income deprived</td>
+                            <td><input type="checkbox" value="option1"> police force area</td></tr>
 
-            <div class="table">
-                <div id="rightmost1" class="table_column">
-                    <table>
-                        <tr>
-                            <th> Education </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>skills & training rank 2012</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>skills & training score 2012</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>number of qualifications</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>not in full time education</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>entering higher education</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>pupil performance</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>pupil absences</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <input type="checkbox">
-                                        </div><!-- /input-group -->
-                                    </div><!-- /.col-lg-6 -->
-                                </div>
-                            </td>
-                        </tr>
+                        <tr><th>Scottish referendum</th><th>Education</th></tr>
+                        <tr><td><input type="checkbox" value="option1"> Electorate</td>
+                            <td><input type="checkbox" value="option1"> skills & training rank 2012</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> Number of voters</td>
+                            <td><input type="checkbox" value="option1"> skills & training score 2012</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> Yes voters</td>
+                            <td><input type="checkbox" value="option1"> number of qualifications</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> No voters</td>
+                            <td><input type="checkbox" value="option1"> not in full time education</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> population</td>
+                            <td><input type="checkbox" value="option1"> entering higher education</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> number of males</td>
+                            <td><input type="checkbox" value="option1"> pupil performance</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> number of females</td>
+                            <td><input type="checkbox" value="option1"> pupil absences</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> area(square km)</td></tr>
+                        <tr><td><input type="checkbox" value="option1"> population density</td></tr>   
+                        <tr><td><input type="checkbox" value="option1"> council expenditure(£)</td></tr>      
                     </table>
-                </div>
-            </div>
         </div>
 
         <div class="container">
@@ -525,34 +193,14 @@
 
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose plot </button>
-                <div class="panel-heading">Already selected:</div>
-                    <table class="table selectedBar">
-                        <tr>
-                            <td>Data:</td>
-                        </tr>
-                        <tr>
-                            <td>Places:</td>
-                        </tr>
-                        <tr>
-                            <td>Graph:</td>
-                        </tr>
-                        <tr>
-                            <th><button type="button" class="btn btn-default center-block">Submit</button></th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
         </div>
-
-
-
     </div>
+</div>
 </div>
 
 
 <div id="plot" class="section">
     <div class="smallsection">
-
     </div>
 </div>
 
