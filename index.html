@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico in the root directory -->
-
+      <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
@@ -112,6 +112,48 @@
     .image9{
         content: url("http://inflationdata.com/inflation/images/inflation_by_decade_small.jpg");
     }
+    .barchar{
+        content:url(bar_2d8.png);
+    }
+
+    .btn-sm{
+      position: relative;
+      vertical-align: center;
+      margin: 0px;
+      height: 100x;
+      padding: 20px 20px;
+      font-size: 4px;
+      color: white;
+      text-align: center;
+      text-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+      background: #62b1d0;
+      border: 0;
+      border-bottom: 3px solid #9FE8EF;
+      cursor: pointer;
+      -webkit-box-shadow: inset 0 -3px #9FE8EF;
+      box-shadow: inset 0 -3px #9FE8EF;
+    }
+
+    .btn-sm:active {
+      top: 2px;
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+    .btn-sm:hover {
+      background: #45E1E8;
+    }
+    .btn-radio {
+    width: 100%;
+}
+.img-radio {
+    opacity: 0.5;
+    margin-bottom: 5px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}
 
 
 </style>
@@ -190,14 +232,59 @@
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose place </button>
         </div>
-
+	 <div id="menu" class="section">
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose plot </button>
+
+	  <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="form-horizontal well" role="form">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="images/barchar.png" class="img-responsive img-radio">
+                        <button type="button" class="btn btn-primary btn-radio">Bar Chart</button>
+                        <input type="checkbox" id="left-item" class="hidden">
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="images/piechart.png">
+                        <button type="button" class="btn btn-primary btn-radio">Pie chart</button>
+                        <input type="checkbox" id="middle-item" class="hidden">
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="images/donutchart.png" class="img-responsive img-radio">
+                        <button type="button" class="btn btn-primary btn-radio">Donut Chart</button>
+                        <input type="checkbox" id="right-item" class="hidden">
+                    </div>
+                </div>
+                <div class="row space-20">
+                    <div class="col-xs-12">  
+        
+                    <div class="col-xs-4">
+                        <img src="images/linechart.png" class="img-responsive img-radio">
+                        <button type="button" class="btn btn-primary btn-radio">Line Chart</button>
+                        <input type="checkbox" id="left-item" class="hidden">
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="images/scatterplot.png" class="img-responsive img-radio">
+                        <button type="button" class="btn btn-primary btn-radio">Scatter plot</button>
+                        <input type="checkbox" id="middle-item" class="hidden">
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="images/bubblechart.png" class="img-responsive img-radio">
+                        <button type="button" class="btn btn-primary btn-radio">Bubble Chart</button>
+                        <input type="checkbox" id="right-item" class="hidden">
+                    </div>
+                </div>
+                <div class="row space-20">
+                    <div class="col-xs-12">
+                       
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-</div>
-
 
 <div id="plot" class="section">
     <div class="smallsection">
