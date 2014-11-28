@@ -19,6 +19,149 @@
 
     <script src="js/modernizr-2.8.3.min.js"></script>
 </head>
+<<<<<<< HEAD
+<style>
+    html
+    {
+        height: 100%;
+        width: 100%;
+    }
+    table
+    {
+        margin-left: 27%;
+        width: 70%;
+        
+    }
+    th{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .button-plot{
+        width: 180px;  height: 120px;
+    }
+    .center-center{
+          margin-right: auto;
+        margin-left: auto;
+        position: relative;
+    }
+    .btn_block_sm{
+        width: 200px;
+        position: relative;
+        margin: 5% auto;
+    }
+    .section {
+        width: 100%;
+        clear: both;
+        padding-top: 100px;
+        border-bottom: 3px solid black;
+    }
+    .smallsection{
+        width: 100%;
+        margin: 0;
+        max-height: 933px;
+        height: 1200px;
+        max-width: 2000px;
+    }
+    #startmenu,#menu,#plot{
+        width: 100%;
+        padding-top: 70px;
+        margin: 0 auto;
+        max-width: 2000px;
+        max-height: 1333px;
+    }
+    .table_column{
+        padding-left: 4px;
+        padding-right: 4px;
+        text-align: center;
+    }
+    #data_tables,#data_tables1{
+        padding-bottom: 180px;
+    }
+    .table{
+        width: 65%;
+        border-collapse: collapse;
+        border-spacing: 5px 5px;
+    }
+    .selectedBar{
+        width: 40%;
+        text-align: left;
+        max-height: 180px;
+    }
+    .image1{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExamplepie.gif");
+    }
+    .image2{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleBar.gif");
+    }
+    .image3{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleLine.gif");
+    }
+    .image4{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleArea.gif");
+    }
+    .image5{
+        content: url("http://www.teach-nology.com/themes/math/graphing/area.gif");
+    }
+    .image6{
+        content: url("http://s3learn.com/wp-content/uploads/2013/01/sample3-small.png");
+    }
+    .image7{
+        content: url("http://www.realtyanalytics.net/images/features/Chart_Small4.jpg");
+    }
+    .image8{
+        content: url("http://i.poweredtemplates.com/i/dg/00/404/ppt-diagram-chart-s.jpg");
+    }
+    .image9{
+        content: url("http://inflationdata.com/inflation/images/inflation_by_decade_small.jpg");
+    }
+    .barchar{
+        content:url(bar_2d8.png);
+    }
+
+    .btn-sm{
+      position: relative;
+      vertical-align: center;
+      margin: 0px;
+      height: 100x;
+      padding: 20px 20px;
+      font-size: 4px;
+      color: white;
+      text-align: center;
+      text-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+      background: #62b1d0;
+      border: 0;
+      border-bottom: 3px solid #9FE8EF;
+      cursor: pointer;
+      -webkit-box-shadow: inset 0 -3px #9FE8EF;
+      box-shadow: inset 0 -3px #9FE8EF;
+    }
+
+    .btn-sm:active {
+      top: 2px;
+      outline: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+    .btn-sm:hover {
+      background: #45E1E8;
+    }
+    .btn-radio {
+    width: 100%;
+}
+.img-radio {
+    opacity: 0.5;
+    margin-bottom: 5px;
+}
+
+.space-20 {
+    margin-top: 20px;
+}
+
+
+</style>
+=======
+
+>>>>>>> a2da666c96fb6c9cd568967e041f41ca224227b7
 <body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
