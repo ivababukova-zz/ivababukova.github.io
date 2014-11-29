@@ -137,6 +137,9 @@
         opacity: 0.5;
     }
 
+    .block {
+        padding: 7px;
+    }
 
     /* CSS helpers from http://pdenya.com/2013/08/08/vertical-space-in-bootstrap/ */
     .voffset  { margin-top: 2px; }
@@ -165,6 +168,9 @@ $(document).ready(function(){
     });
     $( "#chooseLocation" ).click(function(){
         $( "#butLocation" ).slideToggle(500);
+    });
+    $( "#finishPlotCreation" ).click(function(){
+        $( "#errorBar" ).slideToggle(200);
     });
 
 
@@ -259,10 +265,10 @@ $(document).ready(function(){
 <div id="menu" class="section">
     <div class="container">
         <div class="col-lg-10" style="background-color: darkgray">
-            <div class="row">
+            <div class="row block">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
-                    <div class="center-block text-center voffset"><h2>Plot Creation Stages</h2></div>
+                    <div class="center-block text-center"><h2>Plot Creation Stages</h2></div>
                     <div class="btn-group center-block" role="group" aria-label="Select Mode">
                         <button id="chooseData" type="button" class="btn btn-default">Data</button>
                         <button id="choosePlot" type="button" class="btn btn-default">Graph Type</button>
@@ -272,7 +278,7 @@ $(document).ready(function(){
                 <div class="col-lg-4"></div>
             </div>
 
-            <div class="row voffset3">
+            <div class="row block">
                 <div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected
                     <div id="selectorData" class="hide-item">Data</div>
                     <div id="selectorPlaces" class="hide-item">Places</div>
@@ -344,14 +350,32 @@ $(document).ready(function(){
             </div>
             <div class="row voffset3"></div>
         </div>
-        <div id="statusMenu" class="col-lg-2 placeholder" style="background-color: beige">
-            HELLO THERE WORLD!!
-            <br>
-            <br>
-            This is where your status would go...
-            <br>
-            <br>
-            ...If you had any...
+        <div id="statusMenu" class="col-lg-2 placeholder container" style="background-color: beige">
+            <div class="row voffset2 block">
+                <div id="errorBar" class="hide-item alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Missing Data! You haven't selected ... !
+                </div>
+            </div>
+            <div id="plotCreationProgress" class="block">
+                HELLO THERE WORLD!!
+                <br>
+                <br>
+                This is where your status would go...
+                <br>
+                <br>
+                ...If you had any...
+                <br>
+                <br>
+            </div>
+            <div class="row voffset2 block">
+                <button id="finishPlotCreation" class="btn btn-danger center-block">
+                    Create Graph
+                </button>
+            </div>
+
+
         </div>
     </div>
 </div>
