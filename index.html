@@ -18,6 +18,8 @@
 
     <script src="js/modernizr-2.8.3.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
 </head>
 <style>
     html,body
@@ -60,7 +62,7 @@
         border-bottom: 3px solid black;
     }
     .smallsection{
-        width: 100%;
+        /*width: 100%;*/
         max-height: 1333px;
         height: 100%;
         max-width: 2000px;
@@ -120,7 +122,33 @@
         content: url("http://inflationdata.com/inflation/images/inflation_by_decade_small.jpg");
     }
 
+    #map.text {
+        font: 10px sans-serif;
+    }
 
+    .region-boundary {
+        fill: none;
+        stroke: #777;
+        stroke-dasharray: 2,2;
+        stroke-linejoin: round;
+    }
+
+    .hover_group:hover {
+        opacity: 0.5;
+    }
+
+
+    /* CSS helpers from http://pdenya.com/2013/08/08/vertical-space-in-bootstrap/ */
+    .voffset  { margin-top: 2px; }
+    .voffset1 { margin-top: 5px; }
+    .voffset2 { margin-top: 10px; }
+    .voffset3 { margin-top: 15px; }
+    .voffset4 { margin-top: 30px; }
+    .voffset5 { margin-top: 40px; }
+    .voffset6 { margin-top: 60px; }
+    .voffset7 { margin-top: 80px; }
+    .voffset8 { margin-top: 100px; }
+    .voffset9 { margin-top: 150px; }
 </style>
 
 <script type="text/javascript">
@@ -129,12 +157,16 @@ $(document).ready(function(){
     $( "#more" ).click(function(){
         $( "#morebut" ).slideToggle(500);
     });
-    $( "#cPlot" ).click(function(){
+    $( "#choosePlot" ).click(function(){
         $( "#butplot" ).slideToggle(500);
     });
-    $( "#choosedata" ).click(function(){
+    $( "#chooseData" ).click(function(){
         $( "#tabledata" ).slideToggle(500);
     });
+    $( "#chooseLocation" ).click(function(){
+        $( "#butLocation" ).slideToggle(500);
+    });
+
 
     $( '#create' ).click(function() {
          $('html, body').animate({ 
@@ -223,65 +255,128 @@ $(document).ready(function(){
     </div>
 </div>
 
+
 <div id="menu" class="section">
-    <div class="smallsection">
-            <div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected
-                <div id="selectorData" class="hide-item">Data</div>
-                <div id="selectorPlaces" class="hide-item">Places</div>
-                <div id="selectorPlot" class="hide-item">Plot</div>
-            </div>
-        <div class="container">
-            <button type="button" id="choosedata" class="btn btn-default btn-lg btn_block_sm center-block"> Choose data </button>
-
-
-            <div class="hide-item" id="tabledata">
-                <table  >
-                    <tr><th>Income</th><th>Crime</th></tr>
-                    <tr><td><input type="checkbox" value="totalpolution"> Total population</td>
-                        <td><input type="checkbox" value="rank2012"> rank 2012</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> Income rank 2012</td>
-                        <td><input type="checkbox" value="option1"> count 2012</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> Income rate 2012</td>
-                        <td><input type="checkbox" value="option1"> rate per 10 000 people</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> Number of income deprived</td>
-                        <td><input type="checkbox" value="option1"> police force area</td></tr>
-
-                    <tr><th>Scottish referendum</th><th>Education</th></tr>
-                    <tr><td><input type="checkbox" value="option1"> Electorate</td>
-                        <td><input type="checkbox" value="option1"> skills & training rank 2012</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> Number of voters</td>
-                        <td><input type="checkbox" value="option1"> skills & training score 2012</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> Yes voters</td>
-                        <td><input type="checkbox" value="option1"> number of qualifications</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> No voters</td>
-                        <td><input type="checkbox" value="option1"> not in full time education</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> population</td>
-                        <td><input type="checkbox" value="option1"> entering higher education</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> number of males</td>
-                        <td><input type="checkbox" value="option1"> pupil performance</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> number of females</td>
-                        <td><input type="checkbox" value="option1"> pupil absences</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> area(square km)</td></tr>
-                    <tr><td><input type="checkbox" value="option1"> population density</td></tr>   
-                    <tr><td><input type="checkbox" value="option1"> council expenditure(£)</td></tr>      
-                </table>
+    <div class="container">
+        <div class="col-lg-10" style="background-color: darkgray">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div class="center-block text-center voffset"><h2>Plot Creation Stages</h2></div>
+                    <div class="btn-group center-block" role="group" aria-label="Select Mode">
+                        <button id="chooseData" type="button" class="btn btn-default">Data</button>
+                        <button id="choosePlot" type="button" class="btn btn-default">Graph Type</button>
+                        <button id="chooseLocation" type="button" class="btn btn-default">Location</button>
+                    </div>
                 </div>
-        </div>
-
-        <div class="container">
-            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose place </button>
-        </div>
-
-        <div class="container">
-            <button type="button" id="cPlot" class="btn btn-default btn-lg btn_block_sm center-block"> Choose plot </button>
-            <div class="hide-item" id="butplot" style="margin: 0 auto; width: 100%; text-align: center;">
-                <button type="button" id="piechart" value="piechart" class="btn btn-default button-plot"><div class="image1"></div></button>​
+                <div class="col-lg-4"></div>
             </div>
+
+            <div class="row voffset3">
+                <div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected
+                    <div id="selectorData" class="hide-item">Data</div>
+                    <div id="selectorPlaces" class="hide-item">Places</div>
+                    <div id="selectorPlot" class="hide-item">Plot</div>
+                </div>
+
+                <div id="tabledata" class="container hide-item">
+                    <div>
+                        <table>
+                            <tr><th>Income</th><th>Crime</th></tr>
+                            <tr><td><input type="checkbox" value="totalpolution"> Total population</td>
+                                <td><input type="checkbox" value="rank2012"> rank 2012</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> Income rank 2012</td>
+                                <td><input type="checkbox" value="option1"> count 2012</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> Income rate 2012</td>
+                                <td><input type="checkbox" value="option1"> rate per 10 000 people</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> Number of income deprived</td>
+                                <td><input type="checkbox" value="option1"> police force area</td></tr>
+
+                            <tr><th>Scottish referendum</th><th>Education</th></tr>
+                            <tr><td><input type="checkbox" value="option1"> Electorate</td>
+                                <td><input type="checkbox" value="option1"> skills & training rank 2012</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> Number of voters</td>
+                                <td><input type="checkbox" value="option1"> skills & training score 2012</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> Yes voters</td>
+                                <td><input type="checkbox" value="option1"> number of qualifications</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> No voters</td>
+                                <td><input type="checkbox" value="option1"> not in full time education</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> population</td>
+                                <td><input type="checkbox" value="option1"> entering higher education</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> number of males</td>
+                                <td><input type="checkbox" value="option1"> pupil performance</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> number of females</td>
+                                <td><input type="checkbox" value="option1"> pupil absences</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> area(square km)</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> population density</td></tr>
+                            <tr><td><input type="checkbox" value="option1"> council expenditure(£)</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="butLocation" class="container hide-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-2">
+                                <button id="selectall" onclick="toggleAll()" class="btn btn-default">Select All</button>
+                            </div>
+                            <div class="col-sm-5"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div id="mapBox" class="col-md-4">
+
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div id="statusMap" class="col-md-2">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="butplot" class="container hide-item">
+                    <div style="margin: 0 auto; width: 100%; text-align: center;">
+                        <button type="button" id="piechart" value="piechart" class="btn btn-default button-plot"><div class="image1"></div></button>​
+                    </div>
+                </div>
+            </div>
+            <div class="row voffset3"></div>
+        </div>
+        <div id="statusMenu" class="col-lg-2 placeholder" style="background-color: beige">
+            HELLO THERE WORLD!!
+            <br>
+            <br>
+            This is where your status would go...
+            <br>
+            <br>
+            ...If you had any...
         </div>
     </div>
 </div>
-</div>
 
+<!--<div id="map" class="section" style="background-color: #5bc0de">-->
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<div class="col-sm-5"></div>-->
+            <!--<div class="col-sm-2">-->
+                <!--<button id="selectall" onclick="toggleAll()" class="btn btn-default">Select All</button>-->
+            <!--</div>-->
+            <!--<div class="col-sm-5"></div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-4"></div>-->
+            <!--<div id="mapBox" class="col-md-4">-->
+
+            <!--</div>-->
+            <!--<div class="col-md-2"></div>-->
+            <!--<div id="statusMap" class="col-md-2">-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 <div id="plot" class="section">
     <div class="smallsection">
@@ -292,6 +387,7 @@ $(document).ready(function(){
 <script src="js/bootstrap.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
+<script src="js/map.js"></script>
 
 </body>
 </html>
