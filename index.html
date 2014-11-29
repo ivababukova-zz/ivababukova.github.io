@@ -152,6 +152,60 @@
     .voffset7 { margin-top: 80px; }
     .voffset8 { margin-top: 100px; }
     .voffset9 { margin-top: 150px; }
+
+    .flexContainer {
+        display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6 */
+        display: -moz-box;     /* OLD - Firefox 19- (buggy but mostly works) */
+        display: -ms-flexbox;  /* IE 10 */
+        display: -webkit-flex; /* NEW - Chrome */
+        display: flex;         /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    }
+
+    .flexCenter {
+        -webkit-justify-content: center;
+        justify-content: center;
+        flex-flow: row wrap;
+        -webkit-flex-direction: row;
+        align-items: baseline
+    }
+
+    /* http://www.sketchingwithcss.com/samplechapter/cheatsheet.html */
+    .flexHorizontalCellWrap {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        /* You can set flex-wrap and flex-direction individually */
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        /* Or do it all in one line with flex flow */
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+        /* tweak the where items line up on the row */
+        /* valid values are: flex-start, flex-end, spaaace-between, spaaace-around, stretch */
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+
+    /* http://www.sketchingwithcss.com/samplechapter/cheatsheet.html */
+    .flexVerticalCellWrap {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-flex-flow: column wrap;
+        flex-flow: column wrap;
+        -webkit-align-content: center;
+        align-content: center;
+
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -236,27 +290,38 @@ $(document).ready(function(){
 
 <!-- Add your site or application content here -->
 <div id="startmenu" class="section">
-    <div class="smallsection">
-        <div class="container">
-            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Select existing </button>
-            <div style="margin: 0 auto; width: 100%; text-align: center;">
-                <button type="button" class="btn btn-default button-plot"><div class="image4"></div></button>​
-                <button type="button" class="btn btn-default button-plot"><div class="image5"></div></button>
-                <button type="button" class="btn btn-default button-plot"><div class="image6"></div></button>
-                <button type="button" class="btn btn-default button-plot"><div class="image7"></div></button>​
-                <button type="button" class="btn btn-default button-plot"><div class="image8"></div></button>
-                <button type="button" class="btn btn-default button-plot"><div class="image9"></div></button>
+    <div class="smallsection flexVerticalCellWrap">
+        <div class="container flexVerticalCellWrap" style="width: 100%;">
+            <div class="block">
+                <div class="block flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center;">
+                    <button type="button" class="btn btn-default button-plot"><div class="image4"></div></button>​
+                    <button type="button" class="btn btn-default button-plot"><div class="image5"></div></button>
+                    <button type="button" class="btn btn-default button-plot"><div class="image6"></div></button>
+                    <button type="button" class="btn btn-default button-plot"><div class="image7"></div></button>​
+                    <button type="button" class="btn btn-default button-plot"><div class="image8"></div></button>
+                </div>
+                <div id="morebut"   class="hide-item flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center; display: none;">
+                    <button type="button" class="btn btn-default button-plot"><div class="image1"></div></button>​
+                    <button type="button" class="btn btn-default button-plot"><div class="image2"></div></button>
+                    <button type="button" class="btn btn-default button-plot"><div class="image3"></div></button>
+                    <button type="button" class="btn btn-default button-plot"><div class="image9"></div></button>
+                </div>
             </div>
-            <button type="button" id="more" class="btn btn-default btn_block_sm center-block">More</button>
 
-            <div class="hide-item" id="morebut" style="margin: 0 auto; width: 100%; text-align: center;">
-                <button type="button" class="btn btn-default button-plot"><div class="image1"></div></button>​
-                <button type="button" class="btn btn-default button-plot"><div class="image2"></div></button>
-                <button type="button" class="btn btn-default button-plot"><div class="image3"></div></button>
+            <div class="block btn-group">
+                <button id="more" type="button" class="btn btn-default">
+                    <div>Show More...</div>
+                </button>
+                <button type="button" class="btn btn-default">
+                    Add existing <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
+
         <div class="container">
-            <button type="button" id="create" class="btn btn-default btn-lg btn_block_sm center-block"> Create </button>
+            <button type="button" id="create" class="btn btn-default btn-lg btn_block_sm center-block">
+                Create <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+            </button>
         </div>
     </div>
 </div>
@@ -266,16 +331,19 @@ $(document).ready(function(){
     <div class="container">
         <div class="col-lg-10" style="background-color: darkgray">
             <div class="row block">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
                     <div class="center-block text-center"><h2>Plot Creation Stages</h2></div>
-                    <div class="btn-group center-block" role="group" aria-label="Select Mode">
-                        <button id="chooseData" type="button" class="btn btn-default">Data</button>
-                        <button id="choosePlot" type="button" class="btn btn-default">Graph Type</button>
-                        <button id="chooseLocation" type="button" class="btn btn-default">Location</button>
+                    <div class="flexContainer">
+                        <div class="btn-group center-block" role="group" aria-label="Select Mode">
+                            <button id="chooseData" type="button" class="btn btn-default">Data</button>
+                            <button id="choosePlot" type="button" class="btn btn-default">Graph Type</button>
+                            <button id="chooseLocation" type="button" class="btn btn-default">Location</button>
+                        </div>
                     </div>
+
                 </div>
-                <div class="col-lg-4"></div>
+                <div class="col-lg-3"></div>
             </div>
 
             <div class="row block">
@@ -350,7 +418,7 @@ $(document).ready(function(){
             </div>
             <div class="row voffset3"></div>
         </div>
-        <div id="statusMenu" class="col-lg-2 placeholder container" style="background-color: beige">
+        <div id="statusMenu" class="col-lg-2 placeholder container flexVerticalContainer" style="background-color: beige">
             <div class="row voffset2 block">
                 <div id="errorBar" class="hide-item alert alert-danger" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -379,28 +447,6 @@ $(document).ready(function(){
         </div>
     </div>
 </div>
-
-<!--<div id="map" class="section" style="background-color: #5bc0de">-->
-    <!--<div class="container">-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-5"></div>-->
-            <!--<div class="col-sm-2">-->
-                <!--<button id="selectall" onclick="toggleAll()" class="btn btn-default">Select All</button>-->
-            <!--</div>-->
-            <!--<div class="col-sm-5"></div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-4"></div>-->
-            <!--<div id="mapBox" class="col-md-4">-->
-
-            <!--</div>-->
-            <!--<div class="col-md-2"></div>-->
-            <!--<div id="statusMap" class="col-md-2">-->
-
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 
 <div id="plot" class="section">
     <div class="smallsection">
