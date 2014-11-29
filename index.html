@@ -11,14 +11,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico in the root directory -->
-      <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
-    <link rel="stylesheet" href="css/style.css">
 
     <script src="js/modernizr-2.8.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
+<style>
+    html,body
+    {
+        height: 100%;
+        min-height: 800px;
+        width: 100%;
+        /*background: url(images/bg.png);*/ 
+    }
+    table
+    {
+        margin-left: 27%;
+        width: 70%;
+        
+    }
+    th{
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .hide-item{
+        display:none;
+
+    }
+    .button-plot{
+        width: 180px;  height: 120px;
+    }
+    .center-center{
+        margin-right: auto;
+        margin-left: auto;
+        position: relative;
+    }
+    .btn_block_sm{
+        width: 200px;
+        position: relative;
+        margin: 10% auto;
+    }
+    .section {
+        width: 100%;
+        height: 100%;
+        border-bottom: 3px solid black;
+    }
+    .smallsection{
+        width: 100%;
+        max-height: 1333px;
+        height: 100%;
+        max-width: 2000px;
+    }
+    #startmenu,#menu,#plot{
+        width: 100%;
+        /*change here*/
+        /*padding-top: 70px;*/
+        margin: 0 auto;
+        height: 100%;
+        max-width: 2000px;
+        max-height: 1333px;
+    }
+    .table_column{
+        padding-left: 4px;
+        padding-right: 4px;
+        text-align: center;
+    }
+    #data_tables,#data_tables1{
+        padding-bottom: 180px;
+    }
+    .table{
+        width: 65%;
+        border-collapse: collapse;
+        border-spacing: 5px 5px;
+    }
+    .selectedBar{
+        width: 40%;
+        text-align: left;
+        max-height: 180px;
+    }
+    .image1{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExamplepie.gif");
+    }
+    .image2{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleBar.gif");
+    }
+    .image3{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleLine.gif");
+    }
+    .image4{
+        content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleArea.gif");
+    }
+    .image5{
+        content: url("http://www.teach-nology.com/themes/math/graphing/area.gif");
+    }
+    .image6{
+        content: url("http://s3learn.com/wp-content/uploads/2013/01/sample3-small.png");
+    }
+    .image7{
+        content: url("http://www.realtyanalytics.net/images/features/Chart_Small4.jpg");
+    }
+    .image8{
+        content: url("http://i.poweredtemplates.com/i/dg/00/404/ppt-diagram-chart-s.jpg");
+    }
+    .image9{
+        content: url("http://inflationdata.com/inflation/images/inflation_by_decade_small.jpg");
+    }
+
+
+</style>
+
+<script type="text/javascript">
+var selected=[];
+$(document).ready(function(){
+    $( "#more" ).click(function(){
+        $( "#morebut" ).slideToggle(500);
+    });
+    $( "#cPlot" ).click(function(){
+        $( "#butplot" ).slideToggle(500);
+    });
+    $( "#choosedata" ).click(function(){
+        $( "#tabledata" ).slideToggle(500);
+    });
+
+    $( '#create' ).click(function() {
+         $('html, body').animate({ 
+              scrollTop: $( '#menu' ).offset().top 
+          }, 1000);
+        });
+
+
+    $( "input" ).click(function() {
+        inputData();
+        var $input = $( this );
+        if($input.is( ":checked" ))
+            $( "#selector" ).find( '#selectorData' ).append($('<div>'+$input[0].nextSibling.nodeValue+'</div>'));
+        if(!$(this).is(':checked'))
+            $( "#selector" ).find( '#selectorData' ).find('div').remove( ":contains('"+$input[0].nextSibling.nodeValue+"')" );
+        if($( "#selectorData > div" ).length!=0)
+            $( "#selectorData" ).slideDown(500);
+        else if($( "#selectorData > div" ).length==0)
+            $( "#selectorData" ).slideToggle(500);
+        inputData();
+        }).change();
+
+    $( "#butplot > button" ).click(function() {
+        inputData();
+        var $input = $( this );
+        
+        
+        if($( "#selector > #selectorPlot > div:contains(pie)").length==0)
+            $( "#selector" ).find( '#selectorPlot' ).append($('<div>'+$input.val()+'</div>'));
+        else
+            $( "#selector" ).find( '#selectorPlot' ).find('div').remove( ":contains('"+$input.val()+"')" );
+        if($( "#selectorPlot > div" ).length!=0)
+            $( "#selectorPlot" ).slideDown(500);
+        else if($( "#selectorPlot > div" ).length==0)
+            $( "#selectorPlot" ).slideToggle(500);
+        inputData();
+    }).change();
+
+
+
+    var inputData = function() { 
+        if($( "#selector > div > div").length==0)
+            $( "#selector" ).slideToggle(250); 
+    };
+
+    var hideEveryButton = function() { 
+        if($( ).length==0)
+            $( "#selector" ).slideToggle(250); 
+    };
+        
+
+
+    
+});
+</script>
+
 <body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -29,8 +201,6 @@
     <div class="smallsection">
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Select existing </button>
-            <!-- Default panel contents -->
-            <!-- Table -->
             <div style="margin: 0 auto; width: 100%; text-align: center;">
                 <button type="button" class="btn btn-default button-plot"><div class="image4"></div></button>​
                 <button type="button" class="btn btn-default button-plot"><div class="image5"></div></button>
@@ -39,114 +209,79 @@
                 <button type="button" class="btn btn-default button-plot"><div class="image8"></div></button>
                 <button type="button" class="btn btn-default button-plot"><div class="image9"></div></button>
             </div>
-            <button type="button" class="btn btn-default btn_block_sm center-block">More</button></td>
+            <button type="button" id="more" class="btn btn-default btn_block_sm center-block">More</button>
 
-            <div style="margin: 0 auto; width: 100%; text-align: center;">
+            <div class="hide-item" id="morebut" style="margin: 0 auto; width: 100%; text-align: center;">
                 <button type="button" class="btn btn-default button-plot"><div class="image1"></div></button>​
                 <button type="button" class="btn btn-default button-plot"><div class="image2"></div></button>
                 <button type="button" class="btn btn-default button-plot"><div class="image3"></div></button>
             </div>
         </div>
         <div class="container">
-            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Create </button>
+            <button type="button" id="create" class="btn btn-default btn-lg btn_block_sm center-block"> Create </button>
         </div>
     </div>
 </div>
 
 <div id="menu" class="section">
-    <div class="smallsection ">
+    <div class="smallsection">
+            <div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected
+                <div id="selectorData" class="hide-item">Data</div>
+                <div id="selectorPlaces" class="hide-item">Places</div>
+                <div id="selectorPlot" class="hide-item">Plot</div>
+            </div>
         <div class="container">
-            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose data </button>
+            <button type="button" id="choosedata" class="btn btn-default btn-lg btn_block_sm center-block"> Choose data </button>
 
 
-                    <table>
-                        <tr><th>Income</th><th>Crime</th></tr>
-                        <tr><td><input type="checkbox" value="option1"> Total population</td>
-                            <td><input type="checkbox" value="option1"> rank 2012</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> Income rank 2012</td>
-                            <td><input type="checkbox" value="option1"> count 2012</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> Income rate 2012</td>
-                            <td><input type="checkbox" value="option1"> rate per 10 000 people</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> Number of income deprived</td>
-                            <td><input type="checkbox" value="option1"> police force area</td></tr>
+            <div class="hide-item" id="tabledata">
+                <table  >
+                    <tr><th>Income</th><th>Crime</th></tr>
+                    <tr><td><input type="checkbox" value="totalpolution"> Total population</td>
+                        <td><input type="checkbox" value="rank2012"> rank 2012</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> Income rank 2012</td>
+                        <td><input type="checkbox" value="option1"> count 2012</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> Income rate 2012</td>
+                        <td><input type="checkbox" value="option1"> rate per 10 000 people</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> Number of income deprived</td>
+                        <td><input type="checkbox" value="option1"> police force area</td></tr>
 
-                        <tr><th>Scottish referendum</th><th>Education</th></tr>
-                        <tr><td><input type="checkbox" value="option1"> Electorate</td>
-                            <td><input type="checkbox" value="option1"> skills & training rank 2012</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> Number of voters</td>
-                            <td><input type="checkbox" value="option1"> skills & training score 2012</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> Yes voters</td>
-                            <td><input type="checkbox" value="option1"> number of qualifications</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> No voters</td>
-                            <td><input type="checkbox" value="option1"> not in full time education</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> population</td>
-                            <td><input type="checkbox" value="option1"> entering higher education</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> number of males</td>
-                            <td><input type="checkbox" value="option1"> pupil performance</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> number of females</td>
-                            <td><input type="checkbox" value="option1"> pupil absences</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> area(square km)</td></tr>
-                        <tr><td><input type="checkbox" value="option1"> population density</td></tr>   
-                        <tr><td><input type="checkbox" value="option1"> council expenditure(£)</td></tr>      
-                    </table>
+                    <tr><th>Scottish referendum</th><th>Education</th></tr>
+                    <tr><td><input type="checkbox" value="option1"> Electorate</td>
+                        <td><input type="checkbox" value="option1"> skills & training rank 2012</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> Number of voters</td>
+                        <td><input type="checkbox" value="option1"> skills & training score 2012</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> Yes voters</td>
+                        <td><input type="checkbox" value="option1"> number of qualifications</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> No voters</td>
+                        <td><input type="checkbox" value="option1"> not in full time education</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> population</td>
+                        <td><input type="checkbox" value="option1"> entering higher education</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> number of males</td>
+                        <td><input type="checkbox" value="option1"> pupil performance</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> number of females</td>
+                        <td><input type="checkbox" value="option1"> pupil absences</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> area(square km)</td></tr>
+                    <tr><td><input type="checkbox" value="option1"> population density</td></tr>   
+                    <tr><td><input type="checkbox" value="option1"> council expenditure(£)</td></tr>      
+                </table>
+                </div>
         </div>
 
         <div class="container">
             <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose place </button>
         </div>
-	 <div id="menu" class="section">
-        <div class="container">
-            <button type="button" class="btn btn-default btn-lg btn_block_sm center-block"> Choose plot </button>
 
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form class="form-horizontal well" role="form">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <img src="images/barchar.png" class="img-responsive img-radio">
-                        <button type="button" class="btn btn-primary btn-radio">Bar Chart</button>
-                        <input type="checkbox" id="left-item" class="hidden">
-                    </div>
-                    <div class="col-xs-4">
-                        <img src="images/piechart.png">
-                        <button type="button" class="btn btn-primary btn-radio">Pie chart</button>
-                        <input type="checkbox" id="middle-item" class="hidden">
-                    </div>
-                    <div class="col-xs-4">
-                        <img src="images/donutchart.png" class="img-responsive img-radio">
-                        <button type="button" class="btn btn-primary btn-radio">Donut Chart</button>
-                        <input type="checkbox" id="right-item" class="hidden">
-                    </div>
-                </div>
-                <div class="row space-20">
-                    <div class="col-xs-12">  
-        
-                    <div class="col-xs-4">
-                        <img src="images/linechart.png" class="img-responsive img-radio">
-                        <button type="button" class="btn btn-primary btn-radio">Line Chart</button>
-                        <input type="checkbox" id="left-item" class="hidden">
-                    </div>
-                    <div class="col-xs-4">
-                        <img src="images/scatterplot.png" class="img-responsive img-radio">
-                        <button type="button" class="btn btn-primary btn-radio">Scatter plot</button>
-                        <input type="checkbox" id="middle-item" class="hidden">
-                    </div>
-                    <div class="col-xs-4">
-                        <img src="images/bubblechart.png" class="img-responsive img-radio">
-                        <button type="button" class="btn btn-primary btn-radio">Bubble Chart</button>
-                        <input type="checkbox" id="right-item" class="hidden">
-                    </div>
-                </div>
-                <div class="row space-20">
-                    <div class="col-xs-12">
-                       
-                        </div>
-                    </div>
-                </div>
-            </form>
+        <div class="container">
+            <button type="button" id="cPlot" class="btn btn-default btn-lg btn_block_sm center-block"> Choose plot </button>
+            <div class="hide-item" id="butplot" style="margin: 0 auto; width: 100%; text-align: center;">
+                <button type="button" id="piechart" value="piechart" class="btn btn-default button-plot"><div class="image1"></div></button>​
+            </div>
         </div>
     </div>
 </div>
+</div>
+
 
 <div id="plot" class="section">
     <div class="smallsection">
