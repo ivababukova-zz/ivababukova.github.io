@@ -203,8 +203,23 @@
         flex-flow: column wrap;
         -webkit-align-content: center;
         align-content: center;
-
     }
+
+    .flexTop {
+        align-self: flex-start;
+        -webkit-align-self: flex-start;
+    }
+
+    .flexCenter {
+        align-self: center;
+        -webkit-align-self: center;
+    }
+
+    .flexBottom {
+        align-self: flex-end;
+        -webkit-align-self: flex-end;
+    }
+
 
 </style>
 
@@ -225,6 +240,9 @@ $(document).ready(function(){
     });
     $( "#finishPlotCreation" ).click(function(){
         $( "#errorBar" ).slideToggle(200);
+    });
+    $( "#addSelectedGraph" ).click(function(){
+        $( "#initalErrorBar" ).slideToggle(200);
     });
 
 
@@ -291,6 +309,14 @@ $(document).ready(function(){
 <!-- Add your site or application content here -->
 <div id="startmenu" class="section">
     <div class="smallsection flexVerticalCellWrap">
+        <div id="initalErrorBar" class="hide-item alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Select a graph to add!
+        </div>
+
+        <h1>Create a new Plot!</h1>
+
         <div class="container flexVerticalCellWrap" style="width: 100%;">
             <div class="block">
                 <div class="block flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center;">
@@ -312,7 +338,7 @@ $(document).ready(function(){
                 <button id="more" type="button" class="btn btn-default">
                     <div>Show More...</div>
                 </button>
-                <button type="button" class="btn btn-default">
+                <button id="addSelectedGraph" type="button" class="btn btn-default">
                     Add existing <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
                 </button>
             </div>
