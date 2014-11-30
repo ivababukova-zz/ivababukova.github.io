@@ -126,6 +126,10 @@
         font: 10px sans-serif;
     }
 
+    .region {
+
+    }
+
     .region-boundary {
         fill: none;
         stroke: #777;
@@ -224,7 +228,24 @@
 </style>
 
 <script type="text/javascript">
-var selected=[];
+    var selected = [];
+
+    var selectionModel = {
+        plot: {}
+    };
+
+    var inputData;
+
+    function updatePlotSelected() {
+        $( "#selector" ).find( '#selectorPlaces').empty();
+
+        for (var city in selectionModel.plot) {
+            if (selectionModel.plot[city]) {
+                $( "#selector" ).find( '#selectorPlaces' ).append($('<div>'+city+'</div>'));
+            }
+        }
+    }
+
 $(document).ready(function(){
     $( "#more" ).click(function(){
         $( "#morebut" ).slideToggle(500);
@@ -249,8 +270,8 @@ $(document).ready(function(){
     $( '#create' ).click(function() {
          $('html, body').animate({ 
               scrollTop: $( '#menu' ).offset().top 
-          }, 1000);
-        });
+         }, 1000);
+    });
 
 
     $( "input" ).click(function() {
@@ -267,10 +288,11 @@ $(document).ready(function(){
         inputData();
         }).change();
 
-    $( "#butplot > button" ).click(function() {
+    $(".region").click(function() {
+        alert("selected region! " + selectionModel.plot);
+
         inputData();
         var $input = $( this );
-        
         
         if($( "#selector > #selectorPlot > div:contains(pie)").length==0)
             $( "#selector" ).find( '#selectorPlot' ).append($('<div>'+$input.val()+'</div>'));
@@ -285,7 +307,7 @@ $(document).ready(function(){
 
 
 
-    var inputData = function() { 
+    inputData = function() {
         if($( "#selector > div > div").length==0)
             $( "#selector" ).slideToggle(250); 
     };
@@ -294,9 +316,6 @@ $(document).ready(function(){
         if($( ).length==0)
             $( "#selector" ).slideToggle(250); 
     };
-        
-
-
     
 });
 </script>
@@ -373,13 +392,13 @@ $(document).ready(function(){
             </div>
 
             <div class="row block">
-                <div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected
-                    <div id="selectorData" class="hide-item">Data</div>
-                    <div id="selectorPlaces" class="hide-item">Places</div>
-                    <div id="selectorPlot" class="hide-item">Plot</div>
-                </div>
+                <!--<div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected-->
+                    <!--<div id="selectorData" class="hide-item">Data</div>-->
+                    <!--<div id="selectorPlaces" class="hide-item">Places</div>-->
+                    <!--<div id="selectorPlot" class="hide-item">Plot</div>-->
+                <!--</div>-->
 
-                <div id="tabledata" class="container hide-item">
+                <div id="tabledata" class="hide-item">
                     <div>
                         <table>
                             <tr><th>Income</th><th>Crime</th></tr>
@@ -414,17 +433,13 @@ $(document).ready(function(){
                     </div>
                 </div>
 
-                <div id="butLocation" class="container hide-item">
-                    <div class="container">
+                <div id="butLocation" class="hide-item">
+                    <div class="flexVerticalCellWrap">
                         <div class="row">
-                            <div class="col-sm-5"></div>
-                            <div class="col-sm-2">
-                                <button id="selectall" onclick="toggleAll()" class="btn btn-default">Select All</button>
-                            </div>
-                            <div class="col-sm-5"></div>
+                            <button id="selectall" onclick="toggleAll()" class="btn btn-default">Select All</button>
                         </div>
                         <div class="row">
-                            <div class="col-md-4"></div>
+                            <div class="col-md-2"></div>
                             <div id="mapBox" class="col-md-4">
 
                             </div>
@@ -436,9 +451,13 @@ $(document).ready(function(){
                     </div>
                 </div>
 
-                <div id="butplot" class="container hide-item">
-                    <div style="margin: 0 auto; width: 100%; text-align: center;">
-                        <button type="button" id="piechart" value="piechart" class="btn btn-default button-plot"><div class="image1"></div></button>​
+                <div id="butplot" class="hide-item">
+                    <div class="container">
+                        <div class="center-block">
+                            <button type="button" id="piechart" value="piechart" class="btn btn-default button-plot">
+                                <div class="image1"></div>
+                            </button>​
+                        </div>
                     </div>
                 </div>
             </div>
@@ -453,15 +472,11 @@ $(document).ready(function(){
                 </div>
             </div>
             <div id="plotCreationProgress" class="block">
-                HELLO THERE WORLD!!
-                <br>
-                <br>
-                This is where your status would go...
-                <br>
-                <br>
-                ...If you had any...
-                <br>
-                <br>
+                <div id="selector" class="">Selected
+                    <div id="selectorData" class="hide-item">Data</div>
+                    <div id="selectorPlaces" class="">Places</div>
+                    <div id="selectorPlot" class="hide-item">Plot</div>
+                </div>
             </div>
             <div class="row voffset2 block">
                 <button id="finishPlotCreation" class="btn btn-danger center-block">

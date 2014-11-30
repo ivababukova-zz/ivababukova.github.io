@@ -2,7 +2,7 @@
  * Created by nishad on 29/11/14.
  */
 
-var selected = {};
+var selectedOnMap = {};
 var allSelected = false;
 
 function getIdName(name) {
@@ -10,20 +10,36 @@ function getIdName(name) {
 }
 
 function toggleSelection(name) {
-    selected[name] = selected[name] != true;
-    updateSelectedColour(name);
+    setSelected(name, selectedOnMap[name] != true)
 }
 
 function updateSelectedColour(name) {
-    d3.select("#" + name).style('fill', selected[name] == true? "#88FF88" : "#BBBBBB");
+    d3.select("#" + name).style('fill', selectedOnMap[name] == true? "#88FF88" : "#BBBBBB");
+}
+
+function clearSelected() {
+    for (var key in GeoToDataMapping) {
+        setSelected(getIdName(key), false);
+    }
+}
+
+function setSelected(name, state) {
+    selectedOnMap[name] = state;
+    for (var key in GeoToDataMapping) {
+        if (getIdName(key) == name) {
+            selectionModel.plot[GeoToDataMapping[key]] = state;
+            updateSelectedColour(name);
+        }
+    }
+
+    updatePlotSelected();
 }
 
 function toggleAll() {
     allSelected = !allSelected;
 
-    for (var key in selected) {
-        selected[key] = allSelected;
-        updateSelectedColour(key);
+    for (var key in selectedOnMap) {
+        setSelected(key, allSelected);
     }
 }
 
@@ -68,7 +84,7 @@ d3.json("data/osod_sco_locauth.topojson", function(error, map) {
     region.append("path")
         .attr("d", path)
         .attr("id", function(d) { return getIdName(d.properties.name) })
-        .attr("class", function(d) { return d.properties.name; })
+        .attr("class", function(d) { return getIdName(d.properties.name) + " region "; })
         .on("click", function(d) { return toggleSelection(getIdName(d.properties.name)); })
         .style("fill", function(d) { return "#BBBBBB"; })
         .style("stroke", "#000000")
@@ -77,7 +93,7 @@ d3.json("data/osod_sco_locauth.topojson", function(error, map) {
 
 
     region
-        .each(function(d, i) { selected[getIdName(d.properties.name)] = false });
+        .each(function(d, i) { selectedOnMap[getIdName(d.properties.name)] = false });
 
     //svg.append("path")
     //    .datum(mesh)
