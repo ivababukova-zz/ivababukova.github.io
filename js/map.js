@@ -104,7 +104,7 @@ function createMap(containerId, regions) {
     return mapObject;
 }
 
-function createMapPlot(destinationDiv, regionDataMapping, selected, midPoint) {
+function createMapPlot(destinationDiv, regionDataMapping, selected, onHover, midPoint) {
     var mapObj = createMap(destinationDiv, regionsMap);
 
 
@@ -114,15 +114,17 @@ function createMapPlot(destinationDiv, regionDataMapping, selected, midPoint) {
     for (var key in regionDataMapping) {
         var value = regionDataMapping[key];
 
-        if (selected[regionDataMapping])
+        if (selected[DataToGeoNameMapping[getIdName(regionDataMapping[key])]]) {
+            if (value > maxVal) {
+                maxVal = value;
+            }
 
-        if (value > maxVal) {
-            maxVal = value;
+            if (value < maxColour) {
+                minVal = value;
+            }
         }
 
-        if (value < maxColour) {
-            minVal = value;
-        }
+
     }
 
     // Adjust them to get the correct midpoint.
