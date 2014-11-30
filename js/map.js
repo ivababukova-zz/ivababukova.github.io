@@ -25,9 +25,9 @@ function clearSelected() {
 
 function setSelected(name, state) {
     selectedOnMap[name] = state;
-    for (var key in GeoToDataMapping) {
+    for (var key in GeoToDataNameMapping) {
         if (getIdName(key) == name) {
-            selectionModel.plot[GeoToDataMapping[key]] = state;
+            selectionModel.plot[GeoToDataNameMapping[key]] = state;
             updateSelectedColour(name);
         }
     }
@@ -48,18 +48,18 @@ var size = 30;
 var width = 9.3 * size;
 var height = 17 * size;
 
-var svg = d3.select("#mapBox").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+var regionsMap;
 
-d3.json("data/osod_sco_locauth.topojson", function(error, map) {
+function createMap(containerId, regions) {
 
-    if (error) {
-        return console.error(error);
-    }
+    var mapObject = {
+        svg: "",
+        regions: ""
+    };
 
-    var regions = topojson.feature(map, map.objects.lad);
-    var mesh = topojson.mesh(map, map.objects.lad);
+    var svg = d3.select(containerId).append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
     svg.append("path")
         .datum(regions)
@@ -81,7 +81,7 @@ d3.json("data/osod_sco_locauth.topojson", function(error, map) {
         .append('g')
         .classed('node', 'true');
 
-    region.append("path")
+    var path = region.append("path")
         .attr("d", path)
         .attr("id", function(d) { return getIdName(d.properties.name) })
         .attr("class", function(d) { return getIdName(d.properties.name) + " region "; })
@@ -90,21 +90,88 @@ d3.json("data/osod_sco_locauth.topojson", function(error, map) {
         .style("stroke", "#000000")
         .style("stroke-width", "0.1px");
 
-
-
     region
         .each(function(d, i) { selectedOnMap[getIdName(d.properties.name)] = false });
+
+    mapObject.regions = path;
+    mapObject.svg = svg;
 
     //svg.append("path")
     //    .datum(mesh)
     //    .attr("d", path)
     //    .attr("class", "region-boundary");
 
+    return mapObject;
+}
+
+function createMapPlot(destinationDiv, regionDataMapping, selected, midPoint) {
+    var mapObj = createMap(destinationDiv, regionsMap);
+
+
+    // Calculate min & max
+    var minVal = 10000000;
+    var maxVal = -10000000;
+    for (var key in regionDataMapping) {
+        var value = regionDataMapping[key];
+
+        if (selected[regionDataMapping])
+
+        if (value > maxVal) {
+            maxVal = value;
+        }
+
+        if (value < maxColour) {
+            minVal = value;
+        }
+    }
+
+    // Adjust them to get the correct midpoint.
+    var colours;
+    if (midPoint) {
+        var dMax = maxVal - midPoint;
+        var dMin = midPoint - minVal;
+
+        if (dMax > dMin) {
+            minVal = midPoint - dMax;
+        } else {
+            maxVal = midPoint + dMin;
+        }
+
+        colours = ["red", "white", "green"];
+    } else {
+        colours = ["white", "green"];
+    }
+
+    var colour  = d3.scale.linear()
+        .domain([minVal, maxVal])
+        .range(colours);
+
+    // Recolour the map.
+    mapObj
+        .regions
+        .style("fill", function(d) {
+            var nameInDataSet = GeoToDataNameMapping[d.properties.name];
+            var value = regionDataMapping[nameInDataSet];
+            return colour(value);
+        });
+
+    return mapObj;
+}
+
+d3.json("data/osod_sco_locauth.topojson", function(error, map) {
+
+    if (error) {
+        return console.error(error);
+    }
+
+    regionsMap = topojson.feature(map, map.objects.lad);
+    createMap("#mapBox", regionsMap);
 });
 
 //    d3.select("selectall").on("click", toggleAll);
 
-var GeoToDataMapping = {
+// This maps city names from the grographic data to the provded dataset
+var GeoToDataNameMapping = {
     "Aberdeen City": "Aberdeen City",
     "Aberdeenshire": "Aberdeenshire",
     "Angus": "Angus",
@@ -129,6 +196,42 @@ var GeoToDataMapping = {
     "North Lanarkshire": "North Lanarkshire",
     "Orkney Islands": "Orkney Islands",
     "Perth and Kinross": "Perth & Kinross",
+    "Renfrewshire": "Renfrewshire",
+    "Scottish Borders": "Scottish Borders",
+    "Shetland Islands": "Shetland Islands",
+    "South Ayrshire": "South Ayrshire",
+    "South Lanarkshire": "South Lanarkshire",
+    "Stirling": "Stirling",
+    "West Dunbartonshire": "West Dunbartonshire",
+    "West Lothian": "West Lothian"
+};
+
+// and the reverse.
+var DataToGeoNameMapping = {
+    "Aberdeen City": "Aberdeen City",
+    "Aberdeenshire": "Aberdeenshire",
+    "Angus": "Angus",
+    "Argyll & Bute": "Argyll and Bute",
+    "Clackmannanshire": "Clackmannanshire",
+    "Eilean Siar": "Eilean Siar",
+    "Dumfries & Galloway": "Dumfries and Galloway",
+    "Dundee City": "Dundee City",
+    "East Ayrshire": "East Ayrshire",
+    "East Dunbartonshire": "East Dunbartonshire",
+    "East Lothian": "East Lothian",
+    "East Renfrewshire": "East Renfrewshire",
+    "Edinburgh, City of": "City of Edinburgh",
+    "Falkirk": "Falkirk",
+    "Fife": "Fife",
+    "Glasgow City": "Glasgow City",
+    "Highland": "Highland",
+    "Inverclyde": "Inverclyde",
+    "Midlothian": "Midlothian",
+    "Moray": "Moray",
+    "North Ayrshire": "North Ayrshire",
+    "North Lanarkshire": "North Lanarkshire",
+    "Orkney Islands": "Orkney Islands",
+    "Perth & Kinross": "Perth and Kinross",
     "Renfrewshire": "Renfrewshire",
     "Scottish Borders": "Scottish Borders",
     "Shetland Islands": "Shetland Islands",
