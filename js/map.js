@@ -104,9 +104,8 @@ function createMap(containerId, regions) {
     return mapObject;
 }
 
-function createMapPlot(destinationDiv, regionDataMapping, selected, onHover, midPoint) {
+function createMapPlot(destinationDiv, regionDataMapping, selected, midPoint) {
     var mapObj = createMap(destinationDiv, regionsMap);
-
 
     // Calculate min & max
     var minVal = 10000000;
@@ -167,7 +166,16 @@ d3.json("data/osod_sco_locauth.topojson", function(error, map) {
     }
 
     regionsMap = topojson.feature(map, map.objects.lad);
-    createMap("#mapBox", regionsMap);
+    createMap("#mapBox", regionsMap, function (d) {
+        d3.find("mapHovering")
+            .clear();
+
+        d3.select("#mapHovering")
+            .enter().append("text")
+            .text(function(d) {return d.properties.name;})
+            .attr("x", function(d) {return x(d.x);})
+            .attr("y", function (d) {return y(d.y);});
+    });
 });
 
 //    d3.select("selectall").on("click", toggleAll);
