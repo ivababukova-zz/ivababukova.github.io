@@ -27,7 +27,7 @@ function setSelected(name, state) {
     selectedOnMap[name] = state;
     for (var key in GeoToDataNameMapping) {
         if (getIdName(key) == name) {
-            selectionModel.plot[GeoToDataNameMapping[key]] = state;
+            selectionModel.places[GeoToDataNameMapping[key]] = state;
             updateSelectedColour(name);
         }
     }
