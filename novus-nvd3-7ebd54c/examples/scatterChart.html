@@ -96,34 +96,28 @@ var cities = ["Aberdeen City", "Aberdeenshire"];
 var selectedSize = 5;  
 
 // should have at least 2 entries; Count by 2
-var chosen = ["Minimum_Registered_Voters", "Maximum_Registered_Voters", "Minimum_Number_of_Votes", "Maximum_Number_of_Votes", "Mimimum_Yes_Votes", "Maximum_Yes_Votes"]; 
+var chosen = ["Minimum_Registered_Voters", "Maximum_Registered_Voters"]; 
 
 d3.json("../../data/referendum_data.json", 
   function (data) {
 
-    for (var i = 0; i < cities.length; i++) {
       testdata.push({
-        key: cities[i],
+        key: "Cities",
         values: []
       });
 
       for (var j = 0; j < data.length; j++) {
-
-        if (data[j]["City"] === cities[i]) {
-          for (var k = 0; k < chosen.length; k += 2) {
-
-            testdata[i].values.push({
-              x: data[j][chosen[k]], 
-              y: data[j][chosen[k + 1]], 
-              size: selectedSize, 
-              shape: 'circle'    // nvd3 does not take this into account
+        testdata[0].values.push({
+                x: data[j][chosen[0]], 
+                y: data[j][chosen[1]], 
+                size: selectedSize, 
+                shape: 'circle'    // nvd3 does not take this into account
             });
-
-          }
-        }
       }
-    }
-    console.log(testdata);
+    
+
+
+    //console.log(testdata);
     
     //Format A
     var chart;
@@ -157,3 +151,31 @@ d3.json("../../data/referendum_data.json",
 );
 
 </script>
+
+
+<!-- 
+d3.json("../../data/referendum_data.json", 
+  function (data) {
+
+    for (var i = 0; i < cities.length; i++) {
+      testdata.push({
+        key: cities[i],
+        values: []
+      });
+
+      for (var j = 0; j < data.length; j++) {
+
+        if (data[j]["City"] === cities[i]) {
+          for (var k = 0; k < chosen.length; k += 2) {
+
+            testdata[i].values.push({
+              x: data[j][chosen[k]], 
+              y: data[j][chosen[k + 1]], 
+              size: selectedSize, 
+              shape: 'circle'    // nvd3 does not take this into account
+            });
+
+          }
+        }
+      }
+    } -->
