@@ -60,59 +60,100 @@ div {
 
 
 
-//Format A
-var chart;
-nv.addGraph(function() {
-  chart = nv.models.scatterChart()
-                .showDistX(true)
-                .showDistY(true)
-                .useVoronoi(true)
-                .color(d3.scale.category10().range())
-                .transitionDuration(300)
-                ;
-
-  chart.xAxis.tickFormat(d3.format('.02f'));
-  chart.yAxis.tickFormat(d3.format('.02f'));
-  chart.tooltipContent(function(key) {
-      return '<h2>' + key + '</h2>';
-  });
-
-  d3.select('#test1 svg')
-      .datum(randomData(4,40))
-      .call(chart);
-
-  nv.utils.windowResize(chart.update);
-
-  chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
-
-  return chart;
-});
 
 
-function randomData(groups, points) { //# groups,# points per group
-  var data = [],
-      shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
-      random = d3.random.normal();
 
-  for (i = 0; i < groups; i++) {
-    data.push({
-      key: 'Group ' + i,
-      values: []
+// function randomData(groups, points) { //# groups,# points per group
+//   var data = [],
+//       shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
+//       random = d3.random.normal();
+
+//   for (i = 0; i < groups; i++) {
+//     data.push({
+//       key: 'Group ' + i,
+//       values: []
+//     });
+
+//     for (j = 0; j < points; j++) {
+//       data[i].values.push({
+//         x: random(), 
+//         y: random(), 
+//         size: Math.random(), 
+//         shape: shapes[j % 6]
+//       });
+//     }
+//   }
+
+//   return data;
+// }
+
+//var shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square']; //not used by nvd3
+
+var testdata = [];
+
+var cities = ["Aberdeen City", "Aberdeenshire"];
+// later we can make it so that the user can choose by column as well
+var selectedSize = 5;  
+
+// should have at least 2 entries; Count by 2
+var chosen = ["Minimum_Registered_Voters", "Maximum_Registered_Voters", "Minimum_Number_of_Votes", "Maximum_Number_of_Votes", "Mimimum_Yes_Votes", "Maximum_Yes_Votes"]; 
+
+d3.json("../../data/referendum_data.json", 
+  function (data) {
+
+    for (var i = 0; i < cities.length; i++) {
+      testdata.push({
+        key: cities[i],
+        values: []
+      });
+
+      for (var j = 0; j < data.length; j++) {
+
+        if (data[j]["City"] === cities[i]) {
+          for (var k = 0; k < chosen.length; k += 2) {
+
+            testdata[i].values.push({
+              x: data[j][chosen[k]], 
+              y: data[j][chosen[k + 1]], 
+              size: selectedSize, 
+              shape: 'circle'    // nvd3 does not take this into account
+            });
+
+          }
+        }
+      }
+    }
+    console.log(testdata);
+    
+    //Format A
+    var chart;
+    nv.addGraph(function() {
+      chart = nv.models.scatterChart()
+                    .showDistX(true)
+                    .showDistY(true)
+                    .useVoronoi(true)
+                    .color(d3.scale.category10().range())
+                    .transitionDuration(300)
+                    ;
+
+      chart.xAxis.tickFormat(d3.format('.02f'));
+      chart.yAxis.tickFormat(d3.format('.02f'));
+      chart.tooltipContent(function(key) {
+          return '<h2>' + key + '</h2>';
+      });
+
+      d3.select('#test1 svg')
+          .datum(testdata)
+          .call(chart);
+
+      nv.utils.windowResize(chart.update);
+
+      chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+
+      return chart;
     });
 
-    for (j = 0; j < points; j++) {
-      data[i].values.push({
-        x: random(), 
-        y: random(), 
-        size: Math.random(), 
-        shape: shapes[j % 6]
-      });
-    }
   }
-
-  return data;
-}
-
-
+);
 
 </script>
