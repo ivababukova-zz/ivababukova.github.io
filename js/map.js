@@ -57,7 +57,8 @@ function createMap(containerId, regions) {
         regions: ""
     };
 
-    var svg = d3.select(containerId).append("svg")
+    var svg = d3.select(containerId)
+        .append("svg")
         .attr("width", width)
         .attr("height", height);
 
