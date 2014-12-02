@@ -359,7 +359,6 @@
             }
     );
 
-
     function addPlot() {
         var container = createPlotSpace(d3.select("#plotdisplay")).select(".plotContainer");
 
@@ -382,6 +381,12 @@
         }
     }
 
+    function closeAllTabs() {
+        $("#butplot").slideUp(500);
+        $("#tabledata").slideUp(500);
+        $("#butLocation").slideUp(500);
+    }
+
     $(document).ready(function () {
 
 
@@ -389,13 +394,16 @@
             $("#morebut").slideToggle(500);
         });
         $("#choosePlot").click(function () {
-            $("#butplot").slideToggle(500);
+            closeAllTabs();
+            $("#butplot").slideDown(500);
         });
         $("#chooseData").click(function () {
-            $("#tabledata").slideToggle(500);
+            closeAllTabs();
+            $("#tabledata").slideDown(500);
         });
         $("#chooseLocation").click(function () {
-            $("#butLocation").slideToggle(500);
+            closeAllTabs();
+            $("#butLocation").slideDown(500);
         });
         $("#finishPlotCreation").click(function () {
             $("#errorBar").slideToggle(200);
@@ -561,11 +569,6 @@
             </div>
 
             <div class="row block">
-                <!--<div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected-->
-                <!--<div id="selectorData" class="hide-item">Data</div>-->
-                <!--<div id="selectorPlaces" class="hide-item">Places</div>-->
-                <!--<div id="selectorPlot" class="hide-item">Plot</div>-->
-                <!--</div>-->
 
                 <div id="tabledata" class="hide-item">
                     <div>
