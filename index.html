@@ -28,6 +28,11 @@
     <script src="lib/nv/models/pieChart.js"></script>
     <script src="lib/nv/utils.js"></script>
 
+    <script src="lib/nv/tooltip.js"></script>
+    <script src="lib/nv/models/axis.js"></script>
+    <script src="lib/nv/models/discreteBar.js"></script>
+    <script src="lib/nv/models/discreteBarChart.js"></script>
+
 </head>
 <style>
     html, body {
@@ -329,6 +334,7 @@
                 createPieChart("#plotdisplay", selectionModel.dataSelected, selectionModel.places);
                 break;
             case "barchartCreate":
+                createBarChart("#plotdisplay", selectionModel.dataSelected, selectionModel.places);
                 break;
             case "scatterplotCreate":
                 break;
@@ -632,7 +638,7 @@
                                 <div class="image1"></div>
                             </button>
                             ​
-                            <button type="button" id="barChartCreate" value="barchart"
+                            <button type="button" id="barchartCreate" value="barchart"
                                     class="btn btn-default button-plot plotSelector">
                                 <div class="image2"></div>
                             </button>

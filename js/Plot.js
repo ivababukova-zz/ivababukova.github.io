@@ -51,11 +51,44 @@ function createPieChart(destinationDivId, columns, regions) {
     });
 }
 
-function createBarChart(destinationDivId, columns) {
+function createMultiBarChart(destinationDivId, columns) {
 
 }
 
-function createMultiBarChart(destinationDivId, columns) {
+function createBarChart(destinationDivId, columns, regions) {
+
+    var testdata = [];
+    var chosen = filterColumns(columns)[0]; //"Average_Registered_Voters";
+
+    testdata.push({"key": "Bar Chart", "values": new Array()});   
+    //console.log(data);        
+    for (var i = 0; i < data.length; i++) {
+        if (regions[data[i]["City"]]) {
+             testdata[0].values.push({"label": data[i]["City"], 
+                               "value": data[i][chosen]});
+         }    
+    }
+
+    nv.addGraph(function() {  
+      var chart = nv.models.discreteBarChart()
+        .x(function(d) { return d.label })
+        .y(function(d) { return d.value })
+        .staggerLabels(true)
+        //.staggerLabels(testdata[0].values.length > 8)
+        .tooltips(false)
+        .showValues(true)
+        .transitionDuration(250)
+        ;
+
+      d3.select(destinationDivId)
+          .append("svg")
+          .datum(testdata)
+          .call(chart);
+
+      nv.utils.windowResize(chart.update);
+
+      return chart;
+    });
 
 }
 
