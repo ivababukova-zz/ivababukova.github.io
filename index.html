@@ -12,6 +12,7 @@
 
     <!-- Place favicon.ico in the root directory -->
 
+    <link href="css/nv.d3.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
@@ -291,9 +292,40 @@
 
     }
 
+    .graph {
+        width: 100%;
+        border: 2px;
+    }
+
     .scrollable {
         overflow-y: scroll;
         overflow-x: hidden;
+    }
+
+    body {
+        overflow-y:scroll;
+    }
+
+    text {
+        font: 12px sans-serif;
+    }
+
+    .plotNoteContainer {
+        height: 80vh;
+        width: 100vw;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .plotContainer {
+        height: inherit;
+        width: 70%;
+    }
+
+    .noteContainer {
+        height: inherit;
+        width: 30%;
     }
 
 </style>
@@ -329,16 +361,21 @@
 
 
     function addPlot() {
+        var container = createPlotSpace(d3.select("#plotdisplay")).select(".plotContainer");
+
+
+
         switch (selectionModel.plotType) {
             case "piechartCreate":
-                createPieChart("#plotdisplay", selectionModel.dataSelected, selectionModel.places);
+                createPieChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "barchartCreate":
-                createBarChart("#plotdisplay", selectionModel.dataSelected, selectionModel.places);
+                createBarChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "scatterplotCreate":
                 break;
             case "mapplotCreate":
+                    createMapPlot(container, selectionModel.dataSelected, selectedOnMap.places);
                 break;
             default:
                 break;
@@ -595,10 +632,10 @@
                                 <td><input type="checkbox" value="Sum_School_Pupil_Absences">Pupil Absences</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Income_Rank">Income (rank)</td>
+                                <td><input type="checkbox" value="Avg_Income_Rank">Income (rank)</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Income_Score">Income (score)</td>
+                                <td><input type="checkbox" value="Avg_Income_Score">Income (score)</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" value="Sum_Number_of_Deprived">Number of Deprived</td>
@@ -615,8 +652,8 @@
                         <div class="row">
                             <button id="selectall" onclick="toggleAll()" class="btn btn-default">Select All</button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2">
+                        <div class="row" style="width: 100%">
+                            <div class="col-md-4">
                                 <div id="mapHovering"></div>
                             </div>
                             <div id="mapBox" class="col-md-4">
@@ -680,10 +717,8 @@
 </div>
 
 <div id="plot" class="section scrollable">
-    <div class="smallsection">
-        <div id="plotdisplay">
+    <div id="plotdisplay" class="graph">
 
-        </div>
     </div>
 </div>
 

@@ -14,11 +14,11 @@ function filterColumns(columns) {
         return columnsOut;
 }
 
-function createScatterPlot(destinationDivId, columns) {
+function createScatterPlot(destinationDiv, columns, regions) {
 
 }
 
-function createPieChart(destinationDivId, columns, regions) {
+function createPieChart(destinationDiv, columns, regions) {
         var chosen = filterColumns(columns)[0];
         var testdata = [];
 
@@ -29,8 +29,8 @@ function createPieChart(destinationDivId, columns, regions) {
     }
 
     nv.addGraph(function() {
-        var width = 500,
-        height = 500;
+        var width = 1000;
+        var height = 500;
 
         var chart = nv.models.pieChart()
         .x(function(d) { return d.key })
@@ -39,7 +39,7 @@ function createPieChart(destinationDivId, columns, regions) {
         .width(width)
         .height(height);
 
-            d3.select(destinationDivId)
+            destinationDiv
                 .append("svg")
                 .datum(testdata)
                 .transition().duration(1200)
@@ -51,14 +51,14 @@ function createPieChart(destinationDivId, columns, regions) {
     });
 }
 
-function createMultiBarChart(destinationDivId, columns) {
+function createMultiBarChart(destinationDiv, columns, regions) {
 
 }
 
-function createBarChart(destinationDivId, columns, regions) {
+function createBarChart(destinationDiv, columns, regions) {
 
     var testdata = [];
-    var chosen = filterColumns(columns)[0]; //"Average_Registered_Voters";
+    var chosen = filterColumns(columns)[0];
 
     testdata.push({"key": "Bar Chart", "values": new Array()});   
     //console.log(data);        
@@ -80,7 +80,7 @@ function createBarChart(destinationDivId, columns, regions) {
         .transitionDuration(250)
         ;
 
-      d3.select(destinationDivId)
+      destinationDiv
           .append("svg")
           .datum(testdata)
           .call(chart);

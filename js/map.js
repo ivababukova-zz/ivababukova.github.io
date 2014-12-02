@@ -50,14 +50,14 @@ var height = 17 * size;
 
 var regionsMap;
 
-function createMap(containerId, regions) {
+function createMap(container, regions) {
 
     var mapObject = {
         svg: "",
         regions: ""
     };
 
-    var svg = d3.select(containerId)
+    var svg = container
         .append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -105,8 +105,8 @@ function createMap(containerId, regions) {
     return mapObject;
 }
 
-function createMapPlot(destinationDiv, regionDataMapping, selected, midPoint) {
-    var mapObj = createMap(destinationDiv, regionsMap);
+function createMapPlot(container, regionDataMapping, selected, midPoint) {
+    var mapObj = createMap(container, regionsMap);
 
     // Calculate min & max
     var minVal = 10000000;
@@ -119,7 +119,7 @@ function createMapPlot(destinationDiv, regionDataMapping, selected, midPoint) {
                 maxVal = value;
             }
 
-            if (value < maxColour) {
+            if (value < minVal) {
                 minVal = value;
             }
         }
@@ -166,8 +166,9 @@ d3.json("data/osod_sco_locauth.topojson", function(error, map) {
         return console.error(error);
     }
 
+    var div = d3.select("#mapBox");
     regionsMap = topojson.feature(map, map.objects.lad);
-    createMap("#mapBox", regionsMap, function (d) {
+    createMap(div, regionsMap, function (d) {
         d3.find("mapHovering")
             .clear();
 
