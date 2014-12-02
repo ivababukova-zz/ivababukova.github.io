@@ -2,6 +2,63 @@
  * Created by nishad on 29/11/14.
  */
 
+function filterColumns(columns) {
+        var columnsOut = [];
+
+        for (var city in columns) {
+                if (columns[city]) {
+                        columnsOut.push(city);
+                }
+        }
+
+        return columnsOut;
+}
+
+function createScatterPlot(destinationDivId, columns) {
+
+}
+
+function createPieChart(destinationDivId, columns, regions) {
+        var chosen = filterColumns(columns)[0];
+        var testdata = [];
+
+    for (var i = 0; i < data.length; i++) {
+            if (regions[data[i]["City"]]) {
+                    testdata.push({"key": data[i]["City"], "y": data[i][chosen]});
+            }
+    }
+
+    nv.addGraph(function() {
+        var width = 500,
+        height = 500;
+
+        var chart = nv.models.pieChart()
+        .x(function(d) { return d.key })
+        .y(function(d) { return d.y })
+        .color(d3.scale.category10().range())
+        .width(width)
+        .height(height);
+
+            d3.select(destinationDivId)
+                .append("svg")
+                .datum(testdata)
+                .transition().duration(1200)
+                .attr('width', width)
+                .attr('height', height)
+                .call(chart);
+
+        chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+    });
+}
+
+function createBarChart(destinationDivId, columns) {
+
+}
+
+function createMultiBarChart(destinationDivId, columns) {
+
+}
+
 var DataTitleToModelTitle = {
         "Average_Crime_2012_Rank": "Crimes Ranked (rank)",
         "Sum_Crime_2012_Count": "Crimes Committed",

@@ -16,58 +16,74 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
 
-    <script src="js/modernizr-2.8.3.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="lib/modernizr-2.8.3.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="lib/jquery-2.1.1.js"></script>
+    <script src="lib/bootstrap.js"></script>
+
+    <script src="lib/nv.d3.js"></script>
+    <script src="lib/nv/models/legend.js"></script>
+    <script src="lib/nv/models/pie.js"></script>
+    <script src="lib/nv/models/pieChart.js"></script>
+    <script src="lib/nv/utils.js"></script>
+
 </head>
 <style>
-    html,body
-    {
+    html, body {
         height: 100%;
         min-height: 800px;
         width: 100%;
-        /*background: url(images/bg.png);*/ 
+        /*background: url(images/bg.png);*/
     }
-    table
-    {
+
+    table {
         margin-left: 27%;
         width: 70%;
-        
+
     }
-    th{
+
+    th {
         padding-top: 10px;
         padding-bottom: 10px;
     }
-    .hide-item{
-        display:none;
+
+    .hide-item {
+        display: none;
 
     }
-    .button-plot{
-        width: 180px;  height: 120px;
+
+    .button-plot {
+        width: 180px;
+        height: 120px;
     }
-    .center-center{
+
+    .center-center {
         margin-right: auto;
         margin-left: auto;
         position: relative;
     }
-    .btn_block_sm{
+
+    .btn_block_sm {
         width: 200px;
         position: relative;
         margin: 10% auto;
     }
+
     .section {
         width: 100%;
         height: 100%;
         border-bottom: 3px solid black;
     }
-    .smallsection{
+
+    .smallsection {
         /*width: 100%;*/
         max-height: 1333px;
         height: 100%;
         max-width: 2000px;
     }
-    #startmenu,#menu,#plot{
+
+    #startmenu, #menu, #plot {
         width: 100%;
         /*change here*/
         /*padding-top: 70px;*/
@@ -76,49 +92,62 @@
         max-width: 2000px;
         max-height: 1333px;
     }
-    .table_column{
+
+    .table_column {
         padding-left: 4px;
         padding-right: 4px;
         text-align: center;
     }
-    #data_tables,#data_tables1{
+
+    #data_tables, #data_tables1 {
         padding-bottom: 180px;
     }
-    .table{
+
+    .table {
         width: 65%;
         border-collapse: collapse;
         border-spacing: 5px 5px;
     }
-    .selectedBar{
+
+    .selectedBar {
         width: 40%;
         text-align: left;
         max-height: 180px;
     }
-    .image1{
+
+    .image1 {
         content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExamplepie.gif");
     }
-    .image2{
+
+    .image2 {
         content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleBar.gif");
     }
-    .image3{
+
+    .image3 {
         content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleLine.gif");
     }
-    .image4{
+
+    .image4 {
         content: url("http://nces.ed.gov/nceskids/graphing/images/SmallExampleArea.gif");
     }
-    .image5{
+
+    .image5 {
         content: url("http://www.teach-nology.com/themes/math/graphing/area.gif");
     }
-    .image6{
+
+    .image6 {
         content: url("http://s3learn.com/wp-content/uploads/2013/01/sample3-small.png");
     }
-    .image7{
+
+    .image7 {
         content: url("http://www.realtyanalytics.net/images/features/Chart_Small4.jpg");
     }
-    .image8{
+
+    .image8 {
         content: url("http://i.poweredtemplates.com/i/dg/00/404/ppt-diagram-chart-s.jpg");
     }
-    .image9{
+
+    .image9 {
         content: url("http://inflationdata.com/inflation/images/inflation_by_decade_small.jpg");
     }
 
@@ -133,7 +162,7 @@
     .region-boundary {
         fill: none;
         stroke: #777;
-        stroke-dasharray: 2,2;
+        stroke-dasharray: 2, 2;
         stroke-linejoin: round;
     }
 
@@ -146,23 +175,52 @@
     }
 
     /* CSS helpers from http://pdenya.com/2013/08/08/vertical-space-in-bootstrap/ */
-    .voffset  { margin-top: 2px; }
-    .voffset1 { margin-top: 5px; }
-    .voffset2 { margin-top: 10px; }
-    .voffset3 { margin-top: 15px; }
-    .voffset4 { margin-top: 30px; }
-    .voffset5 { margin-top: 40px; }
-    .voffset6 { margin-top: 60px; }
-    .voffset7 { margin-top: 80px; }
-    .voffset8 { margin-top: 100px; }
-    .voffset9 { margin-top: 150px; }
+    .voffset {
+        margin-top: 2px;
+    }
+
+    .voffset1 {
+        margin-top: 5px;
+    }
+
+    .voffset2 {
+        margin-top: 10px;
+    }
+
+    .voffset3 {
+        margin-top: 15px;
+    }
+
+    .voffset4 {
+        margin-top: 30px;
+    }
+
+    .voffset5 {
+        margin-top: 40px;
+    }
+
+    .voffset6 {
+        margin-top: 60px;
+    }
+
+    .voffset7 {
+        margin-top: 80px;
+    }
+
+    .voffset8 {
+        margin-top: 100px;
+    }
+
+    .voffset9 {
+        margin-top: 150px;
+    }
 
     .flexContainer {
-        display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6 */
-        display: -moz-box;     /* OLD - Firefox 19- (buggy but mostly works) */
-        display: -ms-flexbox;  /* IE 10 */
+        display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+        display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+        display: -ms-flexbox; /* IE 10 */
         display: -webkit-flex; /* NEW - Chrome */
-        display: flex;         /* NEW, Spec - Opera 12.1, Firefox 20+ */
+        display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
     }
 
     .flexCenter {
@@ -228,6 +286,11 @@
 
     }
 
+    .scrollable {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -242,101 +305,112 @@
     var inputData;
 
     function updatePlotSelected() {
-        $( "#selector" ).find( '#selectorPlacesContents').empty();
+        $("#selector").find('#selectorPlacesContents').empty();
 
         for (var city in selectionModel.places) {
             if (selectionModel.places[city]) {
-                $( "#selector" ).find( '#selectorPlacesContents' ).append($('<div>'+city+'</div>'));
+                $("#selector").find('#selectorPlacesContents').append($('<div>' + city + '</div>'));
             }
         }
     }
 
-$(document).ready(function(){
+
+    var data = {};
+    d3.json("data/referendum_data.json",
+            function (blob) {
+                data = blob;
+            }
+    );
 
 
-    $( "#more" ).click(function(){
-        $( "#morebut" ).slideToggle(500);
+    $(document).ready(function () {
+
+
+        $("#more").click(function () {
+            $("#morebut").slideToggle(500);
+        });
+        $("#choosePlot").click(function () {
+            $("#butplot").slideToggle(500);
+        });
+        $("#chooseData").click(function () {
+            $("#tabledata").slideToggle(500);
+        });
+        $("#chooseLocation").click(function () {
+            $("#butLocation").slideToggle(500);
+        });
+        $("#finishPlotCreation").click(function () {
+            $("#errorBar").slideToggle(200);
+            createPieChart("#plotdisplay", selectionModel.dataSelected, selectionModel.places);
+        });
+        $("#addSelectedGraph").click(function () {
+            $("#initalErrorBar").slideToggle(200);
+        });
+
+
+        $('#create').click(function () {
+            $('html, body').animate({
+                scrollTop: $('#menu').offset().top
+            }, 1000);
+        });
+
+
+        $("input").click(function () {
+            inputData();
+            var $input = $(this);
+            var name = $input[0].nextSibling.nodeValue;
+
+            if ($input.is(":checked")) {
+                $("#selector").find('#selectorData').append($('<div>' + name + '</div>'));
+                selectionModel.dataSelected[ModelTitleToDataTitle[name]] = true;
+            }
+
+            if (!$(this).is(':checked')) {
+                $("#selector").find('#selectorData').find('div').remove(":contains('" + name + "')");
+                selectionModel.dataSelected[ModelTitleToDataTitle[name]] = false;
+            }
+
+            if ($("#selectorData > div").length != 0) {
+                $("#selectorData").slideDown(500);
+            } else if ($("#selectorData > div").length == 0) {
+                $("#selectorData").slideToggle(500);
+            }
+
+            inputData();
+
+        }).change();
+
+        $(".plotSelector").click(function (event) {
+            inputData();
+
+            var name = $(this).attr("id");
+            $("#selectorPlotContents").empty();
+            $("#selectorPlotContents").append('<div>' + name + '</div>');
+            selectionModel.plotType = name;
+
+            inputData();
+        });
+
+        inputData = function () {
+            if ($("#selectorPlot > div").length == 0) {
+                $("#selectorPlot").slideToggle(250);
+            }
+
+            if ($("#selectorData").length == 0) {
+                $("#selectorData").slideToggle(250);
+            }
+
+            if ($("#selectorPlaces > div").length == 0) {
+                $("#selectorPlaces").slideToggle(250);
+            }
+        };
+
     });
-    $( "#choosePlot" ).click(function(){
-        $( "#butplot" ).slideToggle(500);
-    });
-    $( "#chooseData" ).click(function(){
-        $( "#tabledata" ).slideToggle(500);
-    });
-    $( "#chooseLocation" ).click(function(){
-        $( "#butLocation" ).slideToggle(500);
-    });
-    $( "#finishPlotCreation" ).click(function(){
-        $( "#errorBar" ).slideToggle(200);
-    });
-    $( "#addSelectedGraph" ).click(function(){
-        $( "#initalErrorBar" ).slideToggle(200);
-    });
-
-
-    $( '#create' ).click(function() {
-         $('html, body').animate({ 
-              scrollTop: $( '#menu' ).offset().top 
-         }, 1000);
-    });
-
-
-    $( "input" ).click(function() {
-        inputData();
-        var $input = $(this);
-        var name = $(this).attr("id");
-
-        if ($input.is(":checked")) {
-            $("#selector").find('#selectorData').append($('<div>' + $input[0].nextSibling.nodeValue + '</div>'));
-            model.dataSelected[ModelTitleToDataTitle[name]] = true;
-        }
-
-        if(!$(this).is(':checked')) {
-            $( "#selector" ).find( '#selectorData' ).find('div').remove( ":contains('"+$input[0].nextSibling.nodeValue+"')" );
-            model.dataSelected[ModelTitleToDataTitle[name]] = false;
-        }
-
-        if($( "#selectorData > div" ).length!=0) {
-            $( "#selectorData" ).slideDown(500);
-        } else if($( "#selectorData > div" ).length==0) {
-            $("#selectorData").slideToggle(500);
-        }
-
-        inputData();
-
-    }).change();
-
-    $(".plotSelector").click(function(event) {
-        inputData();
-
-        var name = $(this).attr("id");
-        $("#selectorPlotContents").empty();
-        $("#selectorPlotContents").append('<div>' + name + '</div>');
-        selectionModel.plotType = name;
-
-        inputData();
-    });
-
-    inputData = function() {
-        if($( "#selectorPlot > div").length == 0) {
-            $( "#selectorPlot" ).slideToggle(250);
-        }
-
-        if($( "#selectorData").length == 0) {
-            $( "#selectorData" ).slideToggle(250);
-        }
-
-        if($("#selectorPlaces > div").length == 0) {
-            $( "#selectorPlaces" ).slideToggle(250);
-        }
-    };
-    
-});
 </script>
 
 <body>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <!-- Add your site or application content here -->
@@ -353,17 +427,39 @@ $(document).ready(function(){
         <div class="container flexVerticalCellWrap" style="width: 100%;">
             <div class="block">
                 <div class="block flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center;">
-                    <button type="button" class="btn btn-default button-plot"><div class="image4"></div></button>​
-                    <button type="button" class="btn btn-default button-plot"><div class="image5"></div></button>
-                    <button type="button" class="btn btn-default button-plot"><div class="image6"></div></button>
-                    <button type="button" class="btn btn-default button-plot"><div class="image7"></div></button>​
-                    <button type="button" class="btn btn-default button-plot"><div class="image8"></div></button>
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image4"></div>
+                    </button>
+                    ​
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image5"></div>
+                    </button>
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image6"></div>
+                    </button>
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image7"></div>
+                    </button>
+                    ​
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image8"></div>
+                    </button>
                 </div>
-                <div id="morebut"   class="hide-item flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center; display: none;">
-                    <button type="button" class="btn btn-default button-plot"><div class="image1"></div></button>​
-                    <button type="button" class="btn btn-default button-plot"><div class="image2"></div></button>
-                    <button type="button" class="btn btn-default button-plot"><div class="image3"></div></button>
-                    <button type="button" class="btn btn-default button-plot"><div class="image9"></div></button>
+                <div id="morebut" class="hide-item flexHorizontalCellWrap"
+                     style="margin: 0 auto; width: 100%; text-align: center; display: none;">
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image1"></div>
+                    </button>
+                    ​
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image2"></div>
+                    </button>
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image3"></div>
+                    </button>
+                    <button type="button" class="btn btn-default button-plot">
+                        <div class="image9"></div>
+                    </button>
                 </div>
             </div>
 
@@ -407,43 +503,87 @@ $(document).ready(function(){
 
             <div class="row block">
                 <!--<div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected-->
-                    <!--<div id="selectorData" class="hide-item">Data</div>-->
-                    <!--<div id="selectorPlaces" class="hide-item">Places</div>-->
-                    <!--<div id="selectorPlot" class="hide-item">Plot</div>-->
+                <!--<div id="selectorData" class="hide-item">Data</div>-->
+                <!--<div id="selectorPlaces" class="hide-item">Places</div>-->
+                <!--<div id="selectorPlot" class="hide-item">Plot</div>-->
                 <!--</div>-->
 
                 <div id="tabledata" class="hide-item">
                     <div>
                         <table>
-                            <tr><th>Crime</th><th>Referendum</th></tr>
-                            <tr><td><input type="checkbox" value="Average_Crime_2012_Rank">Crimes Ranked (rank)</td>
-                                <td><input type="checkbox" value="Sum_Number_of_Votes">Number of Votes</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Crime_2012_Count">Crimes Committed</td>
-                                <td><input type="checkbox" value="Sum_Yes_Votes">Yes votes</td></tr>
-                            <tr><td><input type="checkbox" value="Average_Crimes_per_10000">Crimes per 10,000</td>
-                                <td><input type="checkbox" value="Sum_No_Votes">No votes</td></tr>
-                            <tr><td></td>
-                                <td><input type="checkbox" value="Sum_Rejected_Papers">Rejected Votes</td></tr>
+                            <tr>
+                                <th>Crime</th>
+                                <th>Referendum</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Average_Crime_2012_Rank">Crimes Ranked (rank)</td>
+                                <td><input type="checkbox" value="Sum_Number_of_Votes">Number of Votes</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Crime_2012_Count">Crimes Committed</td>
+                                <td><input type="checkbox" value="Sum_Yes_Votes">Yes votes</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Average_Crimes_per_10000">Crimes per 10,000</td>
+                                <td><input type="checkbox" value="Sum_No_Votes">No votes</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="checkbox" value="Sum_Rejected_Papers">Rejected Votes</td>
+                            </tr>
 
-                            <tr><th>Demographic</th><th>Education</th></tr>
-                            <tr><td><input type="checkbox" value="Sum_Total_Population">Total Population</td>
-                                <td><input type="checkbox" value="Average_Education_Score_2012">Education (score)</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Population">Population</td>
-                                <td><input type="checkbox" value="Average_Education_Rank_2012">Education (rank)</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Males">Male Population</td>
-                                <td><input type="checkbox" value="Sum_Working_Age_No_Qualifications">Individuals with no qualifications</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Female">Female Population</td>
-                                <td><input type="checkbox" value="Sum_Not_in_Full_Time_Education">Not in full time education</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Area_km">Average Area (km2)</td>
-                                <td><input type="checkbox" value="Sum_Entering_Higher_Education">Entering Secondary School</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Population_Density">Population Density</td>
-                                <td><input type="checkbox" value="Average_Pupil_Performance">Pupil Performance</td></tr>
-                            <tr><td><input type="checkbox" value="Average_Council_Expenditure_per_Capita">Council Expenditure (per capita)</td>
-                                <td><input type="checkbox" value="Sum_School_Pupil_Absences">Pupil Absences</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Income_Rank">Income (rank)</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Income_Score">Income (score)</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Number_of_Deprived">Number of Deprived</td></tr>
-                            <tr><td><input type="checkbox" value="Sum_Registered_Voters">Registered Voters</td></tr>
+                            <tr>
+                                <th>Demographic</th>
+                                <th>Education</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Total_Population">Total Population</td>
+                                <td><input type="checkbox" value="Average_Education_Score_2012">Education (score)</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Population">Population</td>
+                                <td><input type="checkbox" value="Average_Education_Rank_2012">Education (rank)</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Males">Male Population</td>
+                                <td><input type="checkbox" value="Sum_Working_Age_No_Qualifications">Individuals with no
+                                    qualifications
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Female">Female Population</td>
+                                <td><input type="checkbox" value="Sum_Not_in_Full_Time_Education">Not in full time
+                                    education
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Area_km">Average Area (km2)</td>
+                                <td><input type="checkbox" value="Sum_Entering_Higher_Education">Entering Secondary
+                                    School
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Population_Density">Population Density</td>
+                                <td><input type="checkbox" value="Average_Pupil_Performance">Pupil Performance</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Average_Council_Expenditure_per_Capita">Council
+                                    Expenditure (per capita)
+                                </td>
+                                <td><input type="checkbox" value="Sum_School_Pupil_Absences">Pupil Absences</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Income_Rank">Income (rank)</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Income_Score">Income (score)</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Number_of_Deprived">Number of Deprived</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value="Sum_Registered_Voters">Registered Voters</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -471,16 +611,19 @@ $(document).ready(function(){
                 <div id="butplot" class="hide-item">
                     <div class="container">
                         <div class="center-block">
-                            <button type="button" id="piechartCreate" value="piechart" class="btn btn-default button-plot plotSelector">
+                            <button type="button" id="piechartCreate" value="piechart"
+                                    class="btn btn-default button-plot plotSelector">
                                 <div class="image1"></div>
-                            </button>​
+                            </button>
+                            ​
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row voffset3"></div>
         </div>
-        <div id="statusMenu" class="col-lg-2 placeholder container flexVerticalContainer" style="background-color: beige; height: 100%">
+        <div id="statusMenu" class="col-lg-2 placeholder container flexVerticalContainer"
+             style="background-color: beige; height: 100%">
             <div class="row voffset2 block">
                 <div id="errorBar" class="hide-item alert alert-danger" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -490,9 +633,15 @@ $(document).ready(function(){
             </div>
             <div id="plotCreationProgress" class="block">
                 <div id="selector" class="">Selected
-                    <div id="selectorData" class="voffset">Data <div id="selectorDataContents"></div></div>
-                    <div id="selectorPlaces" class="voffset">Places <div id="selectorPlacesContents"></div></div>
-                    <div id="selectorPlot" class="voffset">Plot <div id="selectorPlotContents"></div></div>
+                    <div id="selectorData" class="voffset">Data
+                        <div id="selectorDataContents"></div>
+                    </div>
+                    <div id="selectorPlaces" class="voffset">Places
+                        <div id="selectorPlacesContents"></div>
+                    </div>
+                    <div id="selectorPlot" class="voffset">Plot
+                        <div id="selectorPlotContents"></div>
+                    </div>
                 </div>
             </div>
             <div class="row voffset2 block ">
@@ -504,16 +653,18 @@ $(document).ready(function(){
     </div>
 </div>
 
-<div id="plot" class="section">
+<div id="plot" class="section scrollable">
     <div class="smallsection">
+        <div id="plotdisplay">
+
+        </div>
     </div>
 </div>
 
-<script src="js/jquery-2.1.1.js"></script>
-<script src="js/bootstrap.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
 <script src="js/map.js"></script>
+<script src="js/Plot.js"></script>
 
 </body>
 </html>
