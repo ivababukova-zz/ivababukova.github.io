@@ -239,12 +239,14 @@
     function updatePlotSelected() {
         $( "#selector" ).find( '#selectorPlaces').empty();
 
-        for (var city in selectionModel.plot) {
-            if (selectionModel.plot[city]) {
-                $( "#selector" ).find( '#selectorPlaces' ).append($('<div>'+city+'</div>'));
-            }
-        }
-    }
+     for (var city in selectionModel.plot) {
+         if (selectionModel.plot[city]) {
+             $( "#selector" ).find( '#selectorPlaces' ).append($('<div>'+city+'</div>'));
+         }
+     }
+ }
+
+
 
 $(document).ready(function(){
 
@@ -405,7 +407,7 @@ $(document).ready(function(){
                         <table>
                             <tr><th>Income</th><th>Crime</th></tr>
                             <tr><td><input type="checkbox" value="totalpolution"> Total population</td>
-                                <td><input type="checkbox" value="rank2012"> rank 2012</td></tr>
+                                <td><input type="checkbox" value="rank2012"> rank 2012</td></tr>-
                             <tr><td><input type="checkbox" value="option1"> Income rank 2012</td>
                                 <td><input type="checkbox" value="option1"> count 2012</td></tr>
                             <tr><td><input type="checkbox" value="option1"> Income rate 2012</td>
@@ -499,6 +501,5 @@ $(document).ready(function(){
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
 <script src="js/map.js"></script>
-
 </body>
 </html>
