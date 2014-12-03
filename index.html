@@ -187,6 +187,21 @@
         padding: 7px;
     }
 
+    .block-data-right {
+        font-size: 11px;
+    }
+
+    .block-data-right-category {
+        font-size: 14px;
+        font-weight: bold;
+        padding-top: 5px;
+    }
+
+    .block-data-right-header {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
     /* CSS helpers from http://pdenya.com/2013/08/08/vertical-space-in-bootstrap/ */
     .voffset {
         margin-top: 2px;
@@ -726,16 +741,16 @@
                     Missing Data! You haven't selected ... !
                 </div>
             </div>
-            <div id="plotCreationProgress" class="block">
-                <div id="selector" class="">Selected
-                    <div id="selectorData" class="voffset">Data
+            <div id="plotCreationProgress" class="block-data-right">
+                <div id="selector"><p class="block-data-right-header">Selected</p>
+                    <div id="selectorData" class="voffset"><p class="block-data-right-category">Data<p>
                         <div id="selectorDataContents"></div>
                     </div>
-                    <div id="selectorPlaces" class="voffset">Places
-                        <div id="selectorPlacesContents"></div>
-                    </div>
-                    <div id="selectorPlot" class="voffset">Plot
+                    <div id="selectorPlot" class="voffset"><p class="block-data-right-category">Plot<p>
                         <div id="selectorPlotContents"></div>
+                    </div>
+                    <div id="selectorPlaces" class="voffset"><p class="block-data-right-category">Places<p>
+                        <div id="selectorPlacesContents"></div>
                     </div>
                 </div>
                 <div class="row voffset2 block ">
