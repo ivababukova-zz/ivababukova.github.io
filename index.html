@@ -399,6 +399,16 @@
         var columns = filterColumns(selection.dataSelected);
         var container;
 
+        if (columns.length == 0) {
+            reportError("No data columns selected! select a column to continue.");
+            return false;
+        }
+
+        if (filterColumns(selection.places).length == 0) {
+            reportError("No locations selected, select some, or all locations to continue.");
+            return false;
+        }
+
         note = note || "";
 
         switch (selection.plotType) {
@@ -441,7 +451,11 @@
         var title = premade[index].title;
         var model = premade[index].model;
         var notes = premade[index].notes;
-        addPlot(model, notes, title)
+        addPlot(model, notes, title);
+
+        $('html, body').animate({
+            scrollTop: $('#plot').offset().top
+        }, 1000);
     }
 
     function clearSelection() {
@@ -466,7 +480,7 @@
 
     function clearError() {
         $("#errorBar").slideUp();
-        $("#errorBar").empty();
+        $("#errorBar p").empty();
     }
 
     $(document).ready(function () {
@@ -496,18 +510,12 @@
         });
 
         $("#finishPlotCreation").click(function () {
-            $("#errorBar").slideToggle(200);
             if (addPlot(selectionModel)) {
                 $('html, body').animate({
                     scrollTop: $('#plot').offset().top
                 }, 1000);
             }
         });
-
-        $("#addSelectedGraph").click(function () {
-//            $("#initalErrorBar").slideToggle(200);
-        });
-
 
         $('#create').click(function () {
             $('html, body').animate({
@@ -563,7 +571,7 @@
             <div id="initalErrorBar" class="hide-item alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>
-                Select a graph to add!
+                <p></p>
             </div>
         </div>
 
@@ -634,16 +642,10 @@
                 <button id="more" type="button" class="btn btn-default">
                     <div>Show More...</div>
                 </button>
-                <button id="addSelectedGraph" type="button" class="btn btn-default">
-                    Add existing <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
+                <button id="create" type="button" class="btn btn-default">
+                    Create new... <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
                 </button>
             </div>
-        </div>
-
-        <div class="row">
-            <button type="button" id="create" class="btn btn-default btn-lg btn_block_sm center-block">
-                Create <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
-            </button>
         </div>
     </div>
 </div>
