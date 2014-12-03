@@ -398,6 +398,7 @@
             $("#morebut").slideToggle(500);
         });
         $("#choosePlot").click(function () {
+<<<<<<< HEAD
             closeAllTabs();
             $("#butplot").slideDown(500);
         });
@@ -408,6 +409,21 @@
         $("#chooseLocation").click(function () {
             closeAllTabs();
             $("#butLocation").slideDown(500);
+=======
+            $("#butplot").slideToggle(500);
+            $("#tabledata").slideUp(500);
+            $("#butLocation").slideUp(500);
+        });
+        $("#chooseData").click(function () {
+            $("#butplot").slideUp(500);
+            $("#tabledata").slideToggle(500);
+            $("#butLocation").slideUp(500);
+        });
+        $("#chooseLocation").click(function () {
+            $("#butplot").slideUp(500);
+            $("#tabledata").slideUp(500);
+            $("#butLocation").slideToggle(500);
+>>>>>>> FETCH_HEAD
         });
         $("#finishPlotCreation").click(function () {
             $("#errorBar").slideToggle(200);
@@ -423,10 +439,15 @@
                 scrollTop: $('#menu').offset().top
             }, 1000);
         });
+        $('#finishPlotCreation').click(function () {
+            $('html, body').animate({
+                scrollTop: $('#plot').offset().top
+            }, 1000);
+        });
 
 
         $("input").click(function () {
-            inputData();
+            //inputData();
             var $input = $(this);
             var name = $input[0].nextSibling.nodeValue;
 
@@ -446,22 +467,22 @@
                 $("#selectorData").slideToggle(500);
             }
 
-            inputData();
+            //inputData();
 
         }).change();
 
         $(".plotSelector").click(function (event) {
-            inputData();
+            //inputData();
 
             var name = $(this).attr("id");
             $("#selectorPlotContents").empty();
             $("#selectorPlotContents").append('<div>' + name + '</div>');
             selectionModel.plotType = name;
 
-            inputData();
+            //inputData();
         });
 
-        inputData = function () {
+        /*inputData = function () {
             if ($("#selectorPlot > div").length == 0) {
                 $("#selectorPlot").slideToggle(250);
             }
@@ -473,7 +494,7 @@
             if ($("#selectorPlaces > div").length == 0) {
                 $("#selectorPlaces").slideToggle(250);
             }
-        };
+        };*/
 
     });
 </script>
@@ -573,6 +594,14 @@
             </div>
 
             <div class="row block">
+<<<<<<< HEAD
+=======
+                <!--<div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected
+                <div id="selectorData" class="hide-item">Data</div>
+                <div id="selectorPlaces" class="hide-item">Places</div>
+                <div id="selectorPlot" class="hide-item">Plot</div>
+                </div>-->
+>>>>>>> FETCH_HEAD
 
                 <div id="tabledata" class="hide-item">
                     <div>
@@ -673,8 +702,10 @@
                 </div>
 
                 <div id="butplot" class="hide-item">
-                    <div class="container">
-                        <div class="center-block">
+                    <div class="container row block">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                        <div class="center-block" style="">
                             <button type="button" id="piechartCreate" value="piechart"
                                     class="btn btn-default button-plot plotSelector">
                                 <div class="image1"></div>
@@ -695,12 +726,14 @@
                                 <div class="image4"></div>
                             </button>
                         </div>
+                        </div>
+                        <div class="col-lg-3"></div>
                     </div>
                 </div>
             </div>
             <div class="row voffset3"></div>
         </div>
-        <div id="statusMenu" class="col-lg-2 placeholder container flexVerticalContainer"
+        <div id="selector" class="col-lg-2 placeholder container flexVerticalContainer"
              style="background-color: beige; height: 100%">
             <div class="row voffset2 block">
                 <div id="errorBar" class="hide-item alert alert-danger" role="alert">
@@ -721,12 +754,13 @@
                         <div id="selectorPlotContents"></div>
                     </div>
                 </div>
+                <div class="row voffset2 block ">
+                    <button id="finishPlotCreation" class="btn btn-danger center-block">
+                        Create Graph
+                    </button>
+                </div>
             </div>
-            <div class="row voffset2 block ">
-                <button id="finishPlotCreation" class="btn btn-danger center-block">
-                    Create Graph
-                </button>
-            </div>
+
         </div>
     </div>
 </div>

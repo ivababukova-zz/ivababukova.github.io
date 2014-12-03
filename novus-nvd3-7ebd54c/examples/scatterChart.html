@@ -92,31 +92,35 @@ div {
 var testdata = [];
 
 var cities = ["Aberdeen City", "Aberdeenshire"];
+
 // later we can make it so that the user can choose by column as well
 var selectedSize = 5;  
 
-// should have at least 2 entries; Count by 2
+// should have at least 2 entries
 var chosen = ["Minimum_Registered_Voters", "Maximum_Registered_Voters"]; 
 
 d3.json("../../data/referendum_data.json", 
   function (data) {
 
-      testdata.push({
-        key: "Cities",
-        values: []
-      });
+    for (var i = 0; i < cities.length; i++) {
+          testdata.push({
+            key: cities[i],
+            values: []
+          });
 
-      for (var j = 0; j < data.length; j++) {
-        testdata[0].values.push({
-                x: data[j][chosen[0]], 
-                y: data[j][chosen[1]], 
-                size: selectedSize, 
-                shape: 'circle'    // nvd3 does not take this into account
-            });
-      }
+          for (var j = 0; j < data.length; j++) {
+
+            if (data[j]["City"] === cities[i]) {
+                testdata[i].values.push({
+                  x: data[j][chosen[0]], 
+                  y: data[j][chosen[1]], 
+                  size: selectedSize, 
+                  shape: 'circle'    // nvd3 does not take this into account
+                });
+            }
+          }
+        }
     
-
-
     //console.log(testdata);
     
     //Format A
@@ -152,7 +156,21 @@ d3.json("../../data/referendum_data.json",
 
 </script>
 
+<!-- 
+ testdata.push({
+        key: "Cities",
+        values: []
+      });
 
+      for (var j = 0; j < data.length; j++) {
+        testdata[0].values.push({
+                x: data[j][chosen[0]], 
+                y: data[j][chosen[1]], 
+                size: selectedSize, 
+                shape: 'circle'    // nvd3 does not take this into account
+            });
+      }
+       -->
 <!-- 
 d3.json("../../data/referendum_data.json", 
   function (data) {
