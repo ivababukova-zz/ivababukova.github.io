@@ -428,11 +428,13 @@
                 createMapPlot(container, selection.dataSelected, selection.places);
                 break;
             default:
-                    // error handling code here.
+                reportError("No plot selected! Select one to continue.");
+                return false;
                 break;
         }
 
         console.log(JSON.stringify(selectionModel));
+        return true;
     }
 
     function loadPremade(index) {
@@ -457,6 +459,14 @@
     }
 
     function reportError (error) {
+        clearError();
+        $("div#errorBar p").text(error);
+        $("#errorBar").slideDown();
+    }
+
+    function clearError() {
+        $("#errorBar").slideUp();
+        $("#errorBar").empty();
     }
 
     $(document).ready(function () {
@@ -466,27 +476,36 @@
         $("#more").click(function () {
             $("#morebut").slideToggle(500);
         });
+
         $("#choosePlot").click(function () {
             $("#butplot").slideDown(500);
             $("#tabledata").slideUp(500);
             $("#butLocation").slideUp(500);
         });
+
         $("#chooseData").click(function () {
             $("#butplot").slideUp(500);
             $("#tabledata").slideDown(500);
             $("#butLocation").slideUp(500);
         });
+
         $("#chooseLocation").click(function () {
             $("#butplot").slideUp(500);
             $("#tabledata").slideUp(500);
             $("#butLocation").slideDown(500);
         });
+
         $("#finishPlotCreation").click(function () {
             $("#errorBar").slideToggle(200);
-            addPlot(selectionModel);
+            if (addPlot(selectionModel)) {
+                $('html, body').animate({
+                    scrollTop: $('#plot').offset().top
+                }, 1000);
+            }
         });
+
         $("#addSelectedGraph").click(function () {
-            $("#initalErrorBar").slideToggle(200);
+//            $("#initalErrorBar").slideToggle(200);
         });
 
 
@@ -495,14 +514,9 @@
                 scrollTop: $('#menu').offset().top
             }, 1000);
         });
-        $('#finishPlotCreation').click(function () {
-            $('html, body').animate({
-                scrollTop: $('#plot').offset().top
-            }, 1000);
-        });
 
-        $("#premadeSelector :button").click(function () {
-            var number = $(this).attr('value');
+        $("#premadeSelector img").click(function () {
+            var number = $(this).attr('data-value');
             loadPremade(number);
         });
 
@@ -545,51 +559,77 @@
 <!-- Add your site or application content here -->
 <div id="startmenu" class="section">
     <div class="smallsection flexVerticalCellWrap">
-        <div id="initalErrorBar" class="hide-item alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
-            Select a graph to add!
+        <div class="row">
+            <div id="initalErrorBar" class="hide-item alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Select a graph to add!
+            </div>
         </div>
 
-        <h1>Create a new Plot!</h1>
+        <div class="row">
+            <h1>Create a new Plot!</h1>
+        </div>
 
-        <div class="container flexVerticalCellWrap" style="width: 100%;">
-            <div id="premadeSelector" class="block">
-                <div class="block flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center;">
-                    <button type="button" class="btn btn-default button-plot" value="0">
-                        <div class="image4"></div>
-                    </button>
-                    <button type="button" class="btn btn-default button-plot" value="1">
-                        <div class="image5"></div>
-                    </button>
-                    <button type="button" class="btn btn-default button-plot" value="2">
-                        <div class="image6"></div>
-                    </button>
-                    <button type="button" class="btn btn-default button-plot" value="3">
-                        <div class="image7"></div>
-                    </button>
+        <div class="row">
+            <div class="container flexVerticalCellWrap" style="width: 100%;">
+                <div id="premadeSelector" class="block">
+                    <div class="block flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center;">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" >
+                                    <img src="images/graph-1.png" data-value="0" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" data-value="1">
+                                    <img src="holder.js/100%x180" data-value="1" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" data-value="2">
+                                    <img src="holder.js/100%x180" data-value="2" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" data-value="3">
+                                    <img src="holder.js/100%x180" data-value="3" alt="...">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                </div>
+                    <div id="morebut" class="hide-item flexHorizontalCellWrap"
+                         style="margin: 0 auto; width: 100%; text-align: center; display: none;">
 
-                <div id="morebut" class="hide-item flexHorizontalCellWrap"
-                     style="margin: 0 auto; width: 100%; text-align: center; display: none;">
-
-                    <button type="button" class="btn btn-default button-plot" value="4">
-                        <div class="image8"></div>
-                    </button>
-                    <button type="button" class="btn btn-default button-plot" value="5">
-                        <div class="image1"></div>
-                    </button>
-                    <button type="button" class="btn btn-default button-plot" value="6">
-                        <div class="image2"></div>
-                    </button>
-                    <button type="button" class="btn btn-default button-plot" value="7">
-                        <div class="image3"></div>
-                    </button>
-
+                        <div class="row">
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" >
+                                    <img src="images/graph-1.png" data-value="4" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" data-value="1">
+                                    <img src="holder.js/100%x180" data-value="5" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" data-value="2">
+                                    <img src="holder.js/100%x180" data-value="6" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <a class="thumbnail" data-value="3">
+                                    <img src="holder.js/100%x180" data-value="7" alt="...">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <div class="block btn-group">
                 <button id="more" type="button" class="btn btn-default">
                     <div>Show More...</div>
@@ -600,7 +640,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="row">
             <button type="button" id="create" class="btn btn-default btn-lg btn_block_sm center-block">
                 Create <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span>
             </button>
