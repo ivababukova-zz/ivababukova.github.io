@@ -5,7 +5,8 @@ function createPlotSpace(parentDiv) {
         .append("div")
         .attr("class", "row plotNoteContainer");
 
-
+    out.append("div")
+        .attr("class", "row title");
 
     out
         .append("div")

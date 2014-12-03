@@ -93,17 +93,25 @@ function createParallelCoordinatesChart(destinationDiv, columns, regions) {
     var chartData = [];
     var chosen = filterColumns(columns); //["Minimum_Registered_Voters", "Maximum_Registered_Voters"];
 
+    var names = [];
+    for (var i in chosen) {
+        names.push(DataTitleToModelTitle[chosen[i]]);
+    }
+
     for (var i = 0; i < data.length; i++) {
       chartData.push({"name": regions[data[i]["City"]]}); 
       
       for (var j = 0; j < chosen.length; j++)
-        chartData[i][chosen[j]] = data[i][chosen[j]];
+        chartData[i][names[j]] = data[i][chosen[j]];
     }
-    //console.log(chartData);    
-    
+
+    console.log(chartData);
+
     var chart;
     nv.addGraph(function() {
         //["economy (mpg)", "cylinders", "displacement (cc)", "power (hp)", "weight (lb)", "0-60 mph (s)", "year"]);
+
+        // I cannot fathom why chosen works for the titles, but not names :/ wtf.
         chart = nv.models.parallelCoordinates()
                       .dimensions(chosen);
 
@@ -197,7 +205,7 @@ var DataTitleToModelTitle = {
         "Sum_Total_Population": "Total Population",
         "Sum_Population": "Population",
         "Sum_Males": "Male Population",
-        "Sum_Female": "Female Population",
+        "Sum_Females": "Female Population",
         "Sum_Area_km": "Average Area (km2)",
         "Sum_Population_Density": "Population Density",
         "Average_Council_Expenditure_per_Capita": "Council Expenditure (per capita)",

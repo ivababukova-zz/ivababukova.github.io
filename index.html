@@ -320,15 +320,18 @@
     }
 
     .plotNoteContainer {
-        height: 80vh;
+        height: 100vh;
         width: 100vw;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
+        display: flex;
+        display: -webkit-flex;
     }
 
     .plotContainer {
-        height: inherit;
+        -webkit-align-content: stretch;
+        align-items: stretch;
         width: 70%;
     }
 
@@ -372,13 +375,19 @@
         var container = createPlotSpace(d3.select("#plotdisplay"))
                 .select(".plotContainer")
                 .append("div")
-                .attr("class", "flexCenterAlign");
+                .attr("class", "flexCenterAlign")
+                .attr("style", "height: 100vh;");
+
+        var topic = container.select(".title");
+        var columns = filterColumns(selectionModel.dataSelected);
 
         switch (selectionModel.plotType) {
             case "piechartCreate":
+                topic.text(columns[0]);
                 createPieChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "barchartCreate":
+                topic.text(columns[0] + " and " + columns[1]);
                 createBarChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "scatterplotCreate":
@@ -388,7 +397,8 @@
                 createParallelCoordinatesChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "mapplotCreate":
-                    createMapPlot(container, selectionModel.dataSelected, selectionModel.places);
+                topic.text(columns[0]);
+                createMapPlot(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             default:
                 break;
@@ -442,16 +452,16 @@
 
         $("input").click(function () {
             var $input = $(this);
-            var name = $input[0].nextSibling.nodeValue;
+            var name = $input.attr('id');
 
             if ($input.is(":checked")) {
-                $("#selector").find('#selectorData').append($('<div>' + name + '</div>'));
-                selectionModel.dataSelected[ModelTitleToDataTitle[name]] = true;
+                $("#selector").find('#selectorData').append($('<div>' + DataTitleToModelTitle[name] + '</div>'));
+                selectionModel.dataSelected[name] = true;
             }
 
-            if (!$(this).is(':checked')) {
-                $("#selector").find('#selectorData').find('div').remove(":contains('" + name + "')");
-                selectionModel.dataSelected[ModelTitleToDataTitle[name]] = false;
+            if (!$input.is(':checked')) {
+                $("#selector").find('#selectorData').find('div').remove(":contains('" + DataTitleToModelTitle[nameum_su] + "')");
+                selectionModel.dataSelected[name] = false;
             }
 
             if ($("#selectorData > div").length != 0) {
@@ -575,20 +585,20 @@
                                 <th>Referendum</th>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Average_Crime_2012_Rank">Crimes Ranked (rank)</td>
-                                <td><input type="checkbox" value="Sum_Number_of_Votes">Number of Votes</td>
+                                <td><input type="checkbox" id="Average_Crime_2012_Rank">Crimes Ranked (rank)</td>
+                                <td><input type="checkbox" id="Sum_Number_of_Votes">Number of Votes</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Crime_2012_Count">Crimes Committed</td>
-                                <td><input type="checkbox" value="Sum_Yes_Votes">Yes votes</td>
+                                <td><input type="checkbox" id="Sum_Crime_2012_Count">Crimes Committed</td>
+                                <td><input type="checkbox" id="Sum_Yes_Votes">Yes votes</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Average_Crimes_per_10000">Crimes per 10,000</td>
-                                <td><input type="checkbox" value="Sum_No_Votes">No votes</td>
+                                <td><input type="checkbox" id="Average_Crimes_per_10000">Crimes per 10,000</td>
+                                <td><input type="checkbox" id="Sum_No_Votes">No votes</td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="checkbox" value="Sum_Rejected_Papers">Rejected Votes</td>
+                                <td><input type="checkbox" id="Sum_Rejected_Papers">Rejected Votes</td>
                             </tr>
 
                             <tr>
@@ -596,46 +606,46 @@
                                 <th>Education</th>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Total_Population">Total Population</td>
-                                <td><input type="checkbox" value="Average_Education_Score_2012">Education (score)</td>
+                                <td><input type="checkbox" id="Sum_Total_Population">Total Population</td>
+                                <td><input type="checkbox" id="Average_Education_Score_2012">Education (score)</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Population">Population</td>
-                                <td><input type="checkbox" value="Average_Education_Rank_2012">Education (rank)</td>
+                                <td><input type="checkbox" id="Sum_Population">Population</td>
+                                <td><input type="checkbox" id="Average_Education_Rank_2012">Education (rank)</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Males">Male Population</td>
-                                <td><input type="checkbox" value="Sum_Working_Age_No_Qualifications">Individuals with no qualifications</td>
+                                <td><input type="checkbox" id="Sum_Males">Male Population</td>
+                                <td><input type="checkbox" id="Sum_Working_Age_No_Qualifications">Individuals with no qualifications</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Female">Female Population</td>
-                                <td><input type="checkbox" value="Sum_Not_in_Full_Time_Education">Not in full time education
+                                <td><input type="checkbox" id="Sum_Females">Female Population</td>
+                                <td><input type="checkbox" id="Sum_Not_in_Full_Time_Education">Not in full time education
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Area_km">Average Area (km2)</td>
-                                <td><input type="checkbox" value="Sum_Entering_Higher_Education">Entering Secondary School
+                                <td><input type="checkbox" id="Sum_Area_km">Average Area (km2)</td>
+                                <td><input type="checkbox" id="Sum_Entering_Higher_Education">Entering Secondary School
                                 </td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Population_Density">Population Density</td>
-                                <td><input type="checkbox" value="Average_Pupil_Performance">Pupil Performance</td>
+                                <td><input type="checkbox" id="Sum_Population_Density">Population Density</td>
+                                <td><input type="checkbox" id="Average_Pupil_Performance">Pupil Performance</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Average_Council_Expenditure_per_Capita">Council Expenditure (per capita)</td>
-                                <td><input type="checkbox" value="Sum_School_Pupil_Absences">Pupil Absences</td>
+                                <td><input type="checkbox" id="Average_Council_Expenditure_per_Capita">Council Expenditure (per capita)</td>
+                                <td><input type="checkbox" id="Sum_School_Pupil_Absences">Pupil Absences</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Avg_Income_Rank">Income (rank)</td>
+                                <td><input type="checkbox" id="Avg_Income_Rank">Income (rank)</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Avg_Income_Score">Income (score)</td>
+                                <td><input type="checkbox" id="Avg_Income_Score">Income (score)</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Number_of_Deprived">Number of Deprived</td>
+                                <td><input type="checkbox" id="Sum_Number_of_Deprived">Number of Deprived</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Sum_Registered_Voters">Registered Voters</td>
+                                <td><input type="checkbox" id="Sum_Registered_Voters">Registered Voters</td>
                             </tr>
                         </table>
                     </div>
@@ -698,7 +708,7 @@
             </div>
             <div class="row voffset3"></div>
         </div>
-        <div id="selector" class="col-lg-2 placeholder container flexVerticalContainer"
+        <div class="col-lg-2 placeholder container flexVerticalContainer"
              style="background-color: beige; height: 100%">
             <div class="row voffset2 block">
                 <div id="errorBar" class="hide-item alert alert-danger" role="alert">
@@ -725,7 +735,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
