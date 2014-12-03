@@ -1,12 +1,13 @@
 
-function createPlotSpace(parentDiv) {
+function createPlotSpace(parentDiv, title) {
+
+    parentDiv.append("h1")
+        .attr("class", "row title")
+        .text(title);
 
     var out = parentDiv
         .append("div")
         .attr("class", "row plotNoteContainer");
-
-    out.append("div")
-        .attr("class", "row title");
 
     out
         .append("div")

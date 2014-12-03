@@ -333,6 +333,7 @@
         -webkit-align-content: stretch;
         align-items: stretch;
         width: 70%;
+        margin: 5px;
     }
 
     .noteContainer {
@@ -371,33 +372,41 @@
             }
     );
 
-    function addPlot() {
-        var container = createPlotSpace(d3.select("#plotdisplay"))
+    function createPlotNoteContainer(title) {
+        return createPlotSpace(d3.select("#plotdisplay"), title)
                 .select(".plotContainer")
                 .append("div")
                 .attr("class", "flexCenterAlign")
                 .attr("style", "height: 100vh;");
+    }
 
-        var topic = container.select(".title");
+    function addPlot() {
         var columns = filterColumns(selectionModel.dataSelected);
-
+        var container;
         switch (selectionModel.plotType) {
             case "piechartCreate":
-                topic.text(columns[0]);
+                container = createPlotNoteContainer(columns[0]);
                 createPieChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "barchartCreate":
-                topic.text(columns[0] + " and " + columns[1]);
+                container = createPlotNoteContainer(columns[0] + " and " + columns[1]);
                 createBarChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "scatterplotCreate":
+                container = createPlotNoteContainer(columns[0] + " and " + columns[1]);
                 createScatterPlot(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "parallelcoordinatesCreate":
+                var names = filterColumns(selectionModel.dataSelected);
+                var text = names[0];
+                for (var i = 1; i < names.length; i++) {
+                    text += " and " + names[i];
+                }
+                container = createPlotNoteContainer(text);
                 createParallelCoordinatesChart(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             case "mapplotCreate":
-                topic.text(columns[0]);
+                container = createPlotNoteContainer(columns[0]);
                 createMapPlot(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             default:
@@ -460,7 +469,7 @@
             }
 
             if (!$input.is(':checked')) {
-                $("#selector").find('#selectorData').find('div').remove(":contains('" + DataTitleToModelTitle[nameum_su] + "')");
+                $("#selector").find('#selectorData').find('div').remove(":contains('" + DataTitleToModelTitle[name] + "')");
                 selectionModel.dataSelected[name] = false;
             }
 
