@@ -229,12 +229,14 @@
         display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
     }
 
-    .flexCenter {
-        -webkit-justify-content: center;
+    .flexCenterAlign {
+        display: flex;
+        align-items: center;
         justify-content: center;
-        flex-flow: row wrap;
-        -webkit-flex-direction: row;
-        align-items: baseline
+
+        display: -webkit-flex;
+        -webkit-align-items: center;
+        -webkit-justify-content: center;
     }
 
     /* http://www.sketchingwithcss.com/samplechapter/cheatsheet.html */
@@ -360,9 +362,10 @@
     );
 
     function addPlot() {
-        var container = createPlotSpace(d3.select("#plotdisplay")).select(".plotContainer");
-
-
+        var container = createPlotSpace(d3.select("#plotdisplay"))
+                .select(".plotContainer")
+                .append("div")
+                .attr("class", "flexCenterAlign");
 
         switch (selectionModel.plotType) {
             case "piechartCreate":
@@ -374,11 +377,13 @@
             case "scatterplotCreate":
                 break;
             case "mapplotCreate":
-                    createMapPlot(container, selectionModel.dataSelected, selectedOnMap.places);
+                    createMapPlot(container, selectionModel.dataSelected, selectionModel.places);
                 break;
             default:
                 break;
         }
+
+        console.log(JSON.stringify(selectionModel));
     }
 
     function closeAllTabs() {
@@ -388,7 +393,6 @@
     }
 
     $(document).ready(function () {
-
 
         $("#more").click(function () {
             $("#morebut").slideToggle(500);
@@ -629,9 +633,7 @@
                                 <td><input type="checkbox" value="Average_Pupil_Performance">Pupil Performance</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" value="Average_Council_Expenditure_per_Capita">Council
-                                    Expenditure (per capita)
-                                </td>
+                                <td><input type="checkbox" value="Average_Council_Expenditure_per_Capita">Council Expenditure (per capita)</td>
                                 <td><input type="checkbox" value="Sum_School_Pupil_Absences">Pupil Absences</td>
                             </tr>
                             <tr>
@@ -681,6 +683,16 @@
                             <button type="button" id="barchartCreate" value="barchart"
                                     class="btn btn-default button-plot plotSelector">
                                 <div class="image2"></div>
+                            </button>
+
+                            <button type="button" id="scatterPlot" value="scatterplot"
+                                    class="btn btn-default button-plot plotSelector">
+                                <div class="image3"></div>
+                            </button>
+
+                            <button type="button" id="mapplotCreate" value="mapplot"
+                                    class="btn btn-default button-plot plotSelector">
+                                <div class="image4"></div>
                             </button>
                         </div>
                     </div>

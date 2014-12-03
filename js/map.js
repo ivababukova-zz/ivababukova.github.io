@@ -91,6 +91,10 @@ function createMap(container, regions) {
         .style("stroke", "#000000")
         .style("stroke-width", "0.1px");
 
+    path
+        .append("svg:title")
+        .text(function(d, i) { return d.properties.name });
+
     region
         .each(function(d, i) { selectedOnMap[getIdName(d.properties.name)] = false });
 
@@ -105,16 +109,19 @@ function createMap(container, regions) {
     return mapObject;
 }
 
-function createMapPlot(container, regionDataMapping, selected, midPoint) {
+function createMapPlot(container, columns, places, midPoint) {
     var mapObj = createMap(container, regionsMap);
+    var chosen = filterColumns(columns)[0];
+    var values = {};
 
     // Calculate min & max
     var minVal = 10000000;
     var maxVal = -10000000;
-    for (var key in regionDataMapping) {
-        var value = regionDataMapping[key];
+    for (var i in data) {
+        if (places[data[i]["City"]]) {
+            var value = data[i][chosen];
+            values[data[i]["City"]] = value;
 
-        if (selected[DataToGeoNameMapping[getIdName(regionDataMapping[key])]]) {
             if (value > maxVal) {
                 maxVal = value;
             }
@@ -123,8 +130,6 @@ function createMapPlot(container, regionDataMapping, selected, midPoint) {
                 minVal = value;
             }
         }
-
-
     }
 
     // Adjust them to get the correct midpoint.
@@ -148,12 +153,11 @@ function createMapPlot(container, regionDataMapping, selected, midPoint) {
         .domain([minVal, maxVal])
         .range(colours);
 
-    // Recolour the map.
     mapObj
         .regions
         .style("fill", function(d) {
             var nameInDataSet = GeoToDataNameMapping[d.properties.name];
-            var value = regionDataMapping[nameInDataSet];
+            var value = values[nameInDataSet];
             return colour(value);
         });
 
