@@ -17,7 +17,7 @@ function updateSelectedColour(name) {
     d3.select("#" + name).style('fill', selectedOnMap[name] == true? "#88FF88" : "#BBBBBB");
 }
 
-function clearSelected() {
+function clearSelectedOnMap() {
     for (var key in GeoToDataMapping) {
         setSelected(getIdName(key), false);
     }

@@ -387,48 +387,76 @@
             }
     );
 
-    function createPlotNoteContainer(title) {
-        return createPlotSpace(d3.select("#plotdisplay"), title)
+    function createPlotNoteContainer(title, note) {
+        return createPlotSpace(d3.select("#plotdisplay"), title, note)
                 .select(".plotContainer")
                 .append("div")
                 .attr("class", "flexCenterAlign")
                 .attr("style", "height: 100vh;");
     }
 
-    function addPlot() {
-        var columns = filterColumns(selectionModel.dataSelected);
+    function addPlot(selection, note, title) {
+        var columns = filterColumns(selection.dataSelected);
         var container;
-        switch (selectionModel.plotType) {
+
+        note = note || "";
+
+        switch (selection.plotType) {
             case "piechartCreate":
-                container = createPlotNoteContainer(columns[0]);
-                createPieChart(container, selectionModel.dataSelected, selectionModel.places);
+                container = createPlotNoteContainer(title || columns[0], note);
+                createPieChart(container, selection.dataSelected, selection.places);
                 break;
             case "barchartCreate":
-                container = createPlotNoteContainer(columns[0] + " and " + columns[1]);
-                createBarChart(container, selectionModel.dataSelected, selectionModel.places);
+                container = createPlotNoteContainer(title || (columns[0] + " and " + columns[1]), note);
+                createBarChart(container, selection.dataSelected, selection.places);
                 break;
             case "scatterplotCreate":
-                container = createPlotNoteContainer(columns[0] + " and " + columns[1]);
-                createScatterPlot(container, selectionModel.dataSelected, selectionModel.places);
+                container = createPlotNoteContainer(title || (columns[0] + " and " + columns[1]), note);
+                createScatterPlot(container, selection.dataSelected, selection.places);
                 break;
             case "parallelcoordinatesCreate":
-                var names = filterColumns(selectionModel.dataSelected);
+                var names = filterColumns(selection.dataSelected);
                 var text = names[0];
                 for (var i = 1; i < names.length; i++) {
                     text += " and " + names[i];
                 }
-                container = createPlotNoteContainer(text);
-                createParallelCoordinatesChart(container, selectionModel.dataSelected, selectionModel.places);
+                container = createPlotNoteContainer(title || text, note);
+                createParallelCoordinatesChart(container, selection.dataSelected, selection.places);
                 break;
             case "mapplotCreate":
-                container = createPlotNoteContainer(columns[0]);
-                createMapPlot(container, selectionModel.dataSelected, selectionModel.places);
+                container = createPlotNoteContainer(title || columns[0], note);
+                createMapPlot(container, selection.dataSelected, selection.places);
                 break;
             default:
+                    // error handling code here.
                 break;
         }
 
         console.log(JSON.stringify(selectionModel));
+    }
+
+    function loadPremade(index) {
+        var title = premade[index].title;
+        var model = premade[index].model;
+        var notes = premade[index].notes;
+        addPlot(model, notes, title)
+    }
+
+    function clearSelection() {
+        $("#tabledata")
+                .select("input")
+                .prop('checked', false);
+
+        clearSelectedOnMap();
+        
+        selectionModel  = {
+            places: {},
+            plotType: "",
+            dataSelected: {}
+        };
+    }
+
+    function reportError (error) {
     }
 
     $(document).ready(function () {
@@ -455,7 +483,7 @@
         });
         $("#finishPlotCreation").click(function () {
             $("#errorBar").slideToggle(200);
-            addPlot();
+            addPlot(selectionModel);
         });
         $("#addSelectedGraph").click(function () {
             $("#initalErrorBar").slideToggle(200);
@@ -473,6 +501,10 @@
             }, 1000);
         });
 
+        $("#premadeSelector :button").click(function () {
+            var number = $(this).attr('value');
+            loadPremade(number);
+        });
 
         $("input").click(function () {
             var $input = $(this);
@@ -493,8 +525,6 @@
             } else if ($("#selectorData > div").length == 0) {
                 $("#selectorData").slideToggle(500);
             }
-
-
         }).change();
 
         $(".plotSelector").click(function (event) {
@@ -524,41 +554,39 @@
         <h1>Create a new Plot!</h1>
 
         <div class="container flexVerticalCellWrap" style="width: 100%;">
-            <div class="block">
+            <div id="premadeSelector" class="block">
                 <div class="block flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center;">
-                    <button type="button" class="btn btn-default button-plot">
+                    <button type="button" class="btn btn-default button-plot" value="0">
                         <div class="image4"></div>
                     </button>
-                    ​
-                    <button type="button" class="btn btn-default button-plot">
+                    <button type="button" class="btn btn-default button-plot" value="1">
                         <div class="image5"></div>
                     </button>
-                    <button type="button" class="btn btn-default button-plot">
+                    <button type="button" class="btn btn-default button-plot" value="2">
                         <div class="image6"></div>
                     </button>
-                    <button type="button" class="btn btn-default button-plot">
+                    <button type="button" class="btn btn-default button-plot" value="3">
                         <div class="image7"></div>
                     </button>
-                    ​
-                    <button type="button" class="btn btn-default button-plot">
-                        <div class="image8"></div>
-                    </button>
+
                 </div>
+
                 <div id="morebut" class="hide-item flexHorizontalCellWrap"
                      style="margin: 0 auto; width: 100%; text-align: center; display: none;">
-                    <button type="button" class="btn btn-default button-plot">
+
+                    <button type="button" class="btn btn-default button-plot" value="4">
+                        <div class="image8"></div>
+                    </button>
+                    <button type="button" class="btn btn-default button-plot" value="5">
                         <div class="image1"></div>
                     </button>
-                    ​
-                    <button type="button" class="btn btn-default button-plot">
+                    <button type="button" class="btn btn-default button-plot" value="6">
                         <div class="image2"></div>
                     </button>
-                    <button type="button" class="btn btn-default button-plot">
+                    <button type="button" class="btn btn-default button-plot" value="7">
                         <div class="image3"></div>
                     </button>
-                    <button type="button" class="btn btn-default button-plot">
-                        <div class="image9"></div>
-                    </button>
+
                 </div>
             </div>
 
@@ -584,6 +612,14 @@
 <div id="menu" class="section">
     <div class="container">
         <div class="col-lg-10" style="background-color: lightblue">
+            <div class="row voffset2 block">
+                <div id="errorBar" class="hide-item alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <p>Missing Data! You haven't selected ... !</p>
+                </div>
+            </div>
+
             <div class="row block">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6">
@@ -660,10 +696,10 @@
                                 <td><input type="checkbox" id="Sum_School_Pupil_Absences">Pupil Absences</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" id="Avg_Income_Rank">Income (rank)</td>
+                                <td><input type="checkbox" id="Average_Income_Rank">Income (rank)</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" id="Avg_Income_Score">Income (score)</td>
+                                <td><input type="checkbox" id="Average_Income_Score">Income (score)</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Sum_Number_of_Deprived">Number of Deprived</td>
@@ -734,13 +770,6 @@
         </div>
         <div class="col-lg-2 placeholder container flexVerticalContainer"
              style="background-color: CCFFFF; height: 100%">
-            <div class="row voffset2 block">
-                <div id="errorBar" class="hide-item alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span>
-                    Missing Data! You haven't selected ... !
-                </div>
-            </div>
             <div id="plotCreationProgress" class="block-data-right">
                 <div id="selector"><p class="block-data-right-header">Selected</p>
                     <div id="selectorData" class="voffset"><p class="block-data-right-category">Data<p>
