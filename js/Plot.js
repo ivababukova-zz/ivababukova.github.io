@@ -203,8 +203,7 @@ var DataTitleToModelTitle = {
         "Sum_No_Votes": "No votes",
         "Sum_Rejected_Papers": "Rejected Votes",
 
-        "Sum_Total_Population": "Total Population",
-        "Sum_Population": "Population",
+        "Sum_Total_Population": "Population",
         "Sum_Males": "Male Population",
         "Sum_Females": "Female Population",
         "Sum_Area_km": "Average Area (km2)",
