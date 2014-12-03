@@ -71,6 +71,7 @@ function createBarChart(destinationDiv, columns, regions) {
         .y(function(d) { return d.value })
         .staggerLabels(true)
         //.staggerLabels(testdata[0].values.length > 8)
+        .rotateLabels(45)
         .tooltips(false)
         .showValues(true)
         .transitionDuration(250)

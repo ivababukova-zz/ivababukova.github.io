@@ -43,33 +43,33 @@ text {
 <script src="stream_layers.js"></script>
 <script>
 
-// var data = [
-//     {
-//       "key": 'Stream 1', 
-//       "values": [{"x": 5, "y": 10}, {"x": 12, "y": 22}]
-//     },
-//     {
-//       "key": 'Stream 2', 
-//       "values": [{"x": 1, "y": 6}, {"x": 3, "y": 7}]
-//     },
-//   ] 
+var testdata = [
+    {
+      "key": 'Stream 1', 
+      "values": [{"x": 'A', "y": 10}, {"x": 'B', "y": 22}]
+    },
+    {
+      "key": 'Stream 2', 
+      "values": [{"x": 'A', "y": 6}, {"x": 'B', "y": 7}]
+    },
+  ] 
 
-var testdata = [];
+// var testdata = [];
 
-var cities = ["Aberdeen City", "Aberdeenshire"]; // must have at least 1
-var chosen = ["Minimum_Registered_Voters", "Maximum_Registered_Voters"]; // must have exactly 2 columns
+// var cities = ["Aberdeen City", "Aberdeenshire"]; // must have at least 1
+// var chosen = ["Minimum_Registered_Voters", "Maximum_Registered_Voters"]; // must have exactly 2 columns
 
-d3.json("../../data/referendum_data.json", 
-  function (data) {
+// d3.json("../../data/referendum_data.json", 
+//   function (data) {
 
-    for (var i = 0; i < cities.length; i++) {
-      testdata.push({"key": cities[i], "values": new Array()});   
-      for (var j = 0; j < data.length; j++) {
-        console.log(testdata);
-        if (data[j]["City"] === cities[i])
-          testdata[i].values.push({"x": data[j][chosen[0]], "y": data[j][chosen[1]]}); 
-      }
-    }
+//     for (var i = 0; i < cities.length; i++) {
+//       testdata.push({"key": cities[i], "values": new Array()});   
+//       for (var j = 0; j < data.length; j++) {
+//         console.log(testdata);
+//         if (data[j]["City"] === cities[i])
+//           testdata[i].values.push({"x": data[j][chosen[0]], "y": data[j][chosen[1]]}); 
+//       }
+//     }
     
     var chart;
     nv.addGraph(function() {
@@ -106,7 +106,7 @@ d3.json("../../data/referendum_data.json",
         return chart;
     });
 
-  }
-);
+//  }
+//);
 
 </script>
