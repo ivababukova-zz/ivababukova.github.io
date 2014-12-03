@@ -334,6 +334,10 @@
         font: 12px sans-serif;
     }
 
+    .title {
+        text-align: center;
+    }
+
     .plotNoteContainer {
         height: 100vh;
         width: 100vw;
@@ -413,28 +417,54 @@
 
         switch (selection.plotType) {
             case "piechartCreate":
-                container = createPlotNoteContainer(title || columns[0], note);
+                if (columns.length != 1) {
+                    reportError("Too many data columns selected, only 1 is needed");
+                    return false;
+                }
+
+                container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
                 createPieChart(container, selection.dataSelected, selection.places);
                 break;
             case "barchartCreate":
-                container = createPlotNoteContainer(title || (columns[0] + " and " + columns[1]), note);
+                if (columns.length != 1) {
+                    reportError("Too many data columns selected, only 1 is needed");
+                    return false;
+                }
+
+                container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
                 createBarChart(container, selection.dataSelected, selection.places);
                 break;
             case "scatterplotCreate":
+                if (columns.length != 2) {
+                    reportError("Too many data columns selected, only 2 are needed");
+                    return false;
+                }
+
                 container = createPlotNoteContainer(title || (columns[0] + " and " + columns[1]), note);
                 createScatterPlot(container, selection.dataSelected, selection.places);
                 break;
             case "parallelcoordinatesCreate":
+                if (columns.length == 0) {
+                    reportError("Too many data columns selected, at least 1 is needed");
+                    return false;
+                }
+
                 var names = filterColumns(selection.dataSelected);
-                var text = names[0];
+                var text = DataTitleToModelTitle[names[0]];
                 for (var i = 1; i < names.length; i++) {
-                    text += " and " + names[i];
+                    text += " and " + DataTitleToModelTitle[names[i]];
                 }
                 container = createPlotNoteContainer(title || text, note);
                 createParallelCoordinatesChart(container, selection.dataSelected, selection.places);
                 break;
             case "mapplotCreate":
-                container = createPlotNoteContainer(title || columns[0], note);
+                if (columns.length != 1) {
+                    reportError("Too many data columns selected, only 1 is needed");
+                    return false;
+                }
+
+
+                container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
                 createMapPlot(container, selection.dataSelected, selection.places);
                 break;
             default:
@@ -591,17 +621,17 @@
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a class="thumbnail" data-value="1">
-                                    <img src="holder.js/100%x180" data-value="1" alt="...">
+                                    <img src="images/graph-2.png" data-value="1" alt="...">
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a class="thumbnail" data-value="2">
-                                    <img src="holder.js/100%x180" data-value="2" alt="...">
+                                    <img src="images/graph-3.png" data-value="2" alt="...">
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a class="thumbnail" data-value="3">
-                                    <img src="holder.js/100%x180" data-value="3" alt="...">
+                                    <img src="images/graph-4.png" data-value="3" alt="...">
                                 </a>
                             </div>
                         </div>
@@ -688,19 +718,19 @@
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Crime_2012_Rank">Crimes Ranked (rank)</td>
-                                <td><input type="checkbox" id="Sum_Number_of_Votes">Number of Votes</td>
+                                <td><input type="checkbox" id="Average_Number_of_Votes">Number of Votes</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Sum_Crime_2012_Count">Crimes Committed</td>
-                                <td><input type="checkbox" id="Sum_Yes_Votes">Yes votes</td>
+                                <td><input type="checkbox" id="Average_Yes_Votes">Yes votes</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Crimes_per_10000">Crimes per 10,000</td>
-                                <td><input type="checkbox" id="Sum_No_Votes">No votes</td>
+                                <td><input type="checkbox" id="Average_No_Votes">No votes</td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="checkbox" id="Sum_Rejected_Papers">Rejected Votes</td>
+                                <td><input type="checkbox" id="Average_Rejected_Papers">Rejected Votes</td>
                             </tr>
 
                             <tr>

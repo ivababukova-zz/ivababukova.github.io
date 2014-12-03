@@ -83,9 +83,9 @@ var premade = [
         "Interestingly you can also see that the poorest areas are middling on their council expenditure but still not achieving as well as others in their expenditure group, but these do give the expected result of being the highest crime areas."
     },
     {
-        title: "",
-        model: {},
-        notes: ""
+        title: "Population Map.",
+        model: {"places":{"Clackmannanshire":true,"Dumfries & Galloway":true,"East Ayrshire":true,"East Lothian":true,"East Renfrewshire":true,"Eilean Siar":true,"Falkirk":true,"Fife":true,"Highland":true,"Inverclyde":true,"Midlothian":true,"Moray":true,"North Ayrshire":true,"Orkney Islands":true,"Perth & Kinross":true,"Scottish Borders":true,"Shetland Islands":true,"South Ayrshire":true,"South Lanarkshire":true,"Stirling":true,"Aberdeen City":true,"Aberdeenshire":true,"Argyll & Bute":true,"Edinburgh, City of":true,"Renfrewshire":true,"West Dunbartonshire":true,"West Lothian":true,"Angus":true,"Dundee City":true,"North Lanarkshire":true,"East Dunbartonshire":true,"Glasgow City":true},"plotType":"mapplotCreate","dataSelected":{"Average_Education_Rank_2012":false,"Sum_Number_of_Deprived":false,"Average_Income_Rank":false,"Sum_Total_Population":false,"Sum_Population_Density":true}},
+        notes: "This is a nice and simple population map, just hover to see where people live. All of the cities are clearly visible on this map. what it does show is the rough impact each region had on the voting results."
     },
     {
         title: "",
