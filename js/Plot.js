@@ -14,10 +14,6 @@ function filterColumns(columns) {
         return columnsOut;
 }
 
-function createScatterPlot(destinationDiv, columns, regions) {
-
-}
-
 function createPieChart(destinationDiv, columns, regions) {
         var chosen = filterColumns(columns)[0];
         var testdata = [];
@@ -122,6 +118,70 @@ function createParallelCoordinatesChart(destinationDiv, columns, regions) {
 
         nv.utils.windowResize(chart.update);
     });
+}
+
+
+function createScatterPlot(destinationDiv, columns, regions) {
+    var testdata = [];
+
+    var cities = filterColumns(regions); //["Aberdeen City", "Aberdeenshire"];
+
+    // later we can make it so that the user can choose by column as well
+    var selectedSize = 5;  
+
+    // should have at least 2 entries
+    var chosen = filterColumns(columns); //["Minimum_Registered_Voters", "Maximum_Registered_Voters"]; 
+
+    for (var i = 0; i < cities.length; i++) {
+          testdata.push({
+            key: cities[i],
+            values: []
+          });
+
+          for (var j = 0; j < data.length; j++) {
+
+            if (data[j]["City"] === cities[i]) {
+                testdata[i].values.push({
+                  x: data[j][chosen[0]], 
+                  y: data[j][chosen[1]], 
+                  size: selectedSize, 
+                  shape: 'circle'    // nvd3 does not take this into account
+                });
+            }
+          }
+        }
+    
+    //console.log(testdata);
+    
+    //Format A
+    var chart;
+    nv.addGraph(function() {
+      chart = nv.models.scatterChart()
+                    .showDistX(true)
+                    .showDistY(true)
+                    .useVoronoi(true)
+                    .color(d3.scale.category10().range())
+                    .transitionDuration(300)
+                    ;
+
+      chart.xAxis.tickFormat(d3.format('.02f'));
+      chart.yAxis.tickFormat(d3.format('.02f'));
+      chart.tooltipContent(function(key) {
+          return '<h2>' + key + '</h2>';
+      });
+      
+      destinationDiv
+          .append("svg")
+          .datum(testdata)
+          .call(chart);
+
+      nv.utils.windowResize(chart.update);
+
+      chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+
+      return chart;
+    });
+
 }
 
 var DataTitleToModelTitle = {
