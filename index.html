@@ -386,44 +386,27 @@
         console.log(JSON.stringify(selectionModel));
     }
 
-    function closeAllTabs() {
-        $("#butplot").slideUp(500);
-        $("#tabledata").slideUp(500);
-        $("#butLocation").slideUp(500);
-    }
-
     $(document).ready(function () {
+
+        $("#tabledata").slideDown(500);
 
         $("#more").click(function () {
             $("#morebut").slideToggle(500);
         });
         $("#choosePlot").click(function () {
-<<<<<<< HEAD
-            closeAllTabs();
             $("#butplot").slideDown(500);
+            $("#tabledata").slideUp(500);
+            $("#butLocation").slideUp(500);
         });
         $("#chooseData").click(function () {
-            closeAllTabs();
+            $("#butplot").slideUp(500);
             $("#tabledata").slideDown(500);
+            $("#butLocation").slideUp(500);
         });
         $("#chooseLocation").click(function () {
-            closeAllTabs();
+            $("#butplot").slideUp(500);
+            $("#tabledata").slideUp(500);
             $("#butLocation").slideDown(500);
-=======
-            $("#butplot").slideToggle(500);
-            $("#tabledata").slideUp(500);
-            $("#butLocation").slideUp(500);
-        });
-        $("#chooseData").click(function () {
-            $("#butplot").slideUp(500);
-            $("#tabledata").slideToggle(500);
-            $("#butLocation").slideUp(500);
-        });
-        $("#chooseLocation").click(function () {
-            $("#butplot").slideUp(500);
-            $("#tabledata").slideUp(500);
-            $("#butLocation").slideToggle(500);
->>>>>>> FETCH_HEAD
         });
         $("#finishPlotCreation").click(function () {
             $("#errorBar").slideToggle(200);
@@ -447,7 +430,6 @@
 
 
         $("input").click(function () {
-            //inputData();
             var $input = $(this);
             var name = $input[0].nextSibling.nodeValue;
 
@@ -467,35 +449,15 @@
                 $("#selectorData").slideToggle(500);
             }
 
-            //inputData();
 
         }).change();
 
         $(".plotSelector").click(function (event) {
-            //inputData();
-
             var name = $(this).attr("id");
             $("#selectorPlotContents").empty();
             $("#selectorPlotContents").append('<div>' + name + '</div>');
             selectionModel.plotType = name;
-
-            //inputData();
         });
-
-        /*inputData = function () {
-            if ($("#selectorPlot > div").length == 0) {
-                $("#selectorPlot").slideToggle(250);
-            }
-
-            if ($("#selectorData").length == 0) {
-                $("#selectorData").slideToggle(250);
-            }
-
-            if ($("#selectorPlaces > div").length == 0) {
-                $("#selectorPlaces").slideToggle(250);
-            }
-        };*/
-
     });
 </script>
 
@@ -594,15 +556,6 @@
             </div>
 
             <div class="row block">
-<<<<<<< HEAD
-=======
-                <!--<div id="selector" class="container hide-item" style="margin-top:5%;width:15%;float: right;">Selected
-                <div id="selectorData" class="hide-item">Data</div>
-                <div id="selectorPlaces" class="hide-item">Places</div>
-                <div id="selectorPlot" class="hide-item">Plot</div>
-                </div>-->
->>>>>>> FETCH_HEAD
-
                 <div id="tabledata" class="hide-item">
                     <div>
                         <table>
@@ -641,20 +594,16 @@
                             </tr>
                             <tr>
                                 <td><input type="checkbox" value="Sum_Males">Male Population</td>
-                                <td><input type="checkbox" value="Sum_Working_Age_No_Qualifications">Individuals with no
-                                    qualifications
-                                </td>
+                                <td><input type="checkbox" value="Sum_Working_Age_No_Qualifications">Individuals with no qualifications</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" value="Sum_Female">Female Population</td>
-                                <td><input type="checkbox" value="Sum_Not_in_Full_Time_Education">Not in full time
-                                    education
+                                <td><input type="checkbox" value="Sum_Not_in_Full_Time_Education">Not in full time education
                                 </td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" value="Sum_Area_km">Average Area (km2)</td>
-                                <td><input type="checkbox" value="Sum_Entering_Higher_Education">Entering Secondary
-                                    School
+                                <td><input type="checkbox" value="Sum_Entering_Higher_Education">Entering Secondary School
                                 </td>
                             </tr>
                             <tr>

@@ -110,7 +110,16 @@ function createMap(container, regions) {
 }
 
 function createMapPlot(container, columns, places, midPoint) {
-    var mapObj = createMap(container, regionsMap);
+
+    var column = container
+        .append("div")
+        .attr("class", "row");
+
+    column
+        .append("div")
+        .attr("class", "col-md-3");
+
+    var mapObj = createMap(column, regionsMap);
     var chosen = filterColumns(columns)[0];
     var values = {};
 
