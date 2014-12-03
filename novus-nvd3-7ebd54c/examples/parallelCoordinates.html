@@ -53,9 +53,9 @@ d3.json("../../data/referendum_data.json",
     console.log(chartData);    
      var chart;
   nv.addGraph(function() {
-
+    //["economy (mpg)", "cylinders", "displacement (cc)", "power (hp)", "weight (lb)", "0-60 mph (s)", "year"]);
     chart = nv.models.parallelCoordinates()
-                  .dimensions(chosen);//["economy (mpg)", "cylinders", "displacement (cc)", "power (hp)", "weight (lb)", "0-60 mph (s)", "year"]);
+                  .dimensions(chosen);
 
     d3.select('#chart1 svg')
         .datum(data)

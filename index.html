@@ -34,6 +34,9 @@
     <script src="lib/nv/models/discreteBar.js"></script>
     <script src="lib/nv/models/discreteBarChart.js"></script>
 
+    <script type="text/javascript" src="lib/d3.v3.js"></script>
+    <script type="text/javascript" src="lib/nv/models/parallelCoordinates.js"></script>
+
 </head>
 <style>
     html, body {
@@ -376,6 +379,9 @@
                 break;
             case "scatterplotCreate":
                 break;
+            case "parallelcoordinatesCreate":
+                createParallelCoordinatesChart(container, selectionModel.dataSelected, selectionModel.places);
+                break;
             case "mapplotCreate":
                     createMapPlot(container, selectionModel.dataSelected, selectionModel.places);
                 break;
@@ -666,6 +672,11 @@
                             </button>
 
                             <button type="button" id="scatterPlot" value="scatterplot"
+                                    class="btn btn-default button-plot plotSelector">
+                                <div class="image3"></div>
+                            </button>
+
+                            <button type="button" id="parallelcoordinatesCreate" value="parallelcoordinates"
                                     class="btn btn-default button-plot plotSelector">
                                 <div class="image3"></div>
                             </button>

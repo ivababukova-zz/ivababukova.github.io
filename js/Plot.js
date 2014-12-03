@@ -92,6 +92,38 @@ function createBarChart(destinationDiv, columns, regions) {
 
 }
 
+
+function createParallelCoordinatesChart(destinationDiv, columns, regions) {
+    var chartData = [];
+    var chosen = filterColumns(columns); //["Minimum_Registered_Voters", "Maximum_Registered_Voters"];
+
+    for (var i = 0; i < data.length; i++) {
+      chartData.push({"name": regions[data[i]["City"]]}); 
+      
+      for (var j = 0; j < chosen.length; j++)
+        chartData[i][chosen[j]] = data[i][chosen[j]];
+    }
+    //console.log(chartData);    
+    
+    var chart;
+    nv.addGraph(function() {
+        //["economy (mpg)", "cylinders", "displacement (cc)", "power (hp)", "weight (lb)", "0-60 mph (s)", "year"]);
+        chart = nv.models.parallelCoordinates()
+                      .dimensions(chosen);
+
+        destinationDiv
+            .append("svg")
+            .datum(data)
+            .call(chart);
+
+        // chart.dispatch.on('brush', function(e) {
+        //   nv.log(e);
+        // });
+
+        nv.utils.windowResize(chart.update);
+    });
+}
+
 var DataTitleToModelTitle = {
         "Average_Crime_2012_Rank": "Crimes Ranked (rank)",
         "Sum_Crime_2012_Count": "Crimes Committed",
