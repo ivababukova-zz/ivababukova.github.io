@@ -403,6 +403,10 @@
         var columns = filterColumns(selection.dataSelected);
         var container;
 
+        if ($("#NoPlotDefined").length) {
+            $("#NoPlotDefined").remove();
+        }
+
         if (columns.length == 0) {
             reportError("No data columns selected! select a column to continue.");
             return false;
@@ -418,7 +422,7 @@
         switch (selection.plotType) {
             case "piechartCreate":
                 if (columns.length != 1) {
-                    reportError("Too many data columns selected, only 1 is needed");
+                    reportError("Incorrect number of data columns selected, only 1 is needed");
                     return false;
                 }
 
@@ -427,16 +431,17 @@
                 break;
             case "barchartCreate":
                 if (columns.length != 1) {
-                    reportError("Too many data columns selected, only 1 is needed");
+                    reportError("Incorrect number of data columns selected, only 1 is needed");
                     return false;
                 }
 
                 container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
                 createBarChart(container, selection.dataSelected, selection.places);
                 break;
+
             case "scatterplotCreate":
                 if (columns.length != 2) {
-                    reportError("Too many data columns selected, only 2 are needed");
+                    reportError("Incorrect number of data columns selected, 2 are needed.");
                     return false;
                 }
 
@@ -445,7 +450,7 @@
                 break;
             case "parallelcoordinatesCreate":
                 if (columns.length == 0) {
-                    reportError("Too many data columns selected, at least 1 is needed");
+                    reportError("Incorrect number of data columns selected, at least 1 is needed");
                     return false;
                 }
 
@@ -459,7 +464,7 @@
                 break;
             case "mapplotCreate":
                 if (columns.length != 1) {
-                    reportError("Too many data columns selected, only 1 is needed");
+                    reportError("Incorrect number of data columns selected, only 1 is needed");
                     return false;
                 }
 
@@ -469,7 +474,7 @@
 
             case "zeroedMapplotCreate":
                 if (columns.length != 1) {
-                    reportError("Too many data columns selected, only 1 is needed");
+                    reportError("Incorrect number of data columns selected, only 1 is needed");
                     return false;
                 }
 
@@ -926,7 +931,7 @@
 
 <div id="plot" class="section scrollable">
     <div id="plotdisplay" class="graph">
-
+        <h1 id="NoPlotDefined" style="text-align: center">No plots created! Create one to continue!</h1>
     </div>
 </div>
 
