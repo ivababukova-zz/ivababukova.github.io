@@ -88,14 +88,21 @@ var premade = [
         notes: "This is a nice and simple population map, just hover to see where people live. All of the cities are clearly visible on this map. what it does show is the rough impact each region had on the voting results."
     },
     {
-        title: "",
-        model: {},
-        notes: ""
+        title: "Education, Turnout Correlation",
+        model: {"places":{"Clackmannanshire":true,"Dumfries & Galloway":true,"East Ayrshire":true,"East Lothian":true,"East Renfrewshire":true,"Eilean Siar":true,"Falkirk":true,"Fife":true,"Highland":true,"Inverclyde":true,"Midlothian":true,"Moray":true,"North Ayrshire":true,"Orkney Islands":true,"Perth & Kinross":true,"Scottish Borders":true,"Shetland Islands":true,"South Ayrshire":true,"South Lanarkshire":true,"Stirling":true,"Aberdeen City":true,"Aberdeenshire":true,"Argyll & Bute":true,"Edinburgh, City of":true,"Renfrewshire":true,"West Dunbartonshire":true,"West Lothian":true,"Angus":true,"Dundee City":true,"North Lanarkshire":true,"East Dunbartonshire":true,"Glasgow City":true},"plotType":"scatterplotCreate","dataSelected":{"No_Minus_Yes_Votes":false,"Average_Education_Score_2012":false,"Average_Education_Rank_2012":true,"Percentage_Voter_Turnout":true}},
+        notes: "Counter intuitively a higher education level correlates inversely with voter turnout, where are intuitively you may expect the opposite. But upon further thought, this can be explain by the belief that the less educated are more willing to engage in the political process in an effort to improve their circumstances, whereas the more educated tend t be jaded to it.\n"+
+        "This trend of lower turnout for more educated is also visible in figure one, where the turnout for the most educated isn’t (although not very predictable) is generally on the lower end of the turnout, whereas as the less educated consistently tend towards higher turnout.\n" +
+        "One phenomenon which may just be an artifact of the data, or is more significant, is that there appear to be two separate groups to the data, one above the other, with a gap in between. We could not attribute any specific reasoning for it, but it is a curiosity worth further thought."
     },
     {
-        title: "",
-        model: {},
-        notes: ""
+        title: "Education",
+        model: {"places":{"Clackmannanshire":true,"Dumfries & Galloway":true,"East Ayrshire":true,"East Lothian":true,"East Renfrewshire":true,"Eilean Siar":true,"Falkirk":true,"Fife":true,"Highland":true,"Inverclyde":true,"Midlothian":true,"Moray":true,"North Ayrshire":true,"Orkney Islands":true,"Perth & Kinross":true,"Scottish Borders":true,"Shetland Islands":true,"South Ayrshire":true,"South Lanarkshire":true,"Stirling":true,"Aberdeen City":true,"Aberdeenshire":true,"Argyll & Bute":true,"Edinburgh, City of":true,"Renfrewshire":true,"West Dunbartonshire":true,"West Lothian":true,"Angus":true,"Dundee City":true,"North Lanarkshire":true,"East Dunbartonshire":true,"Glasgow City":true},"plotType":"barchartCreate","dataSelected":{"No_Minus_Yes_Votes":false,"Average_Education_Score_2012":true}},
+        notes: "Its rather clear using this graph, that the most educated areas are Glasgow, North Lanarkshire and East Ayrshire, in that order. Glasgow and its surroundings are both the most educated and the most undereducated regions of Scotland, with East Renfrewshire and East Dunblane pulling up the rear, where they are very strongly behind the rest of the area, country and any of the other measured areas. Both of these regions also voted very strongly No, which indicates that the hypothesis that there is geographic relationship between Yes and No voting is unlikely to be true and it more than likely to be related to their wealth and education."
+    },
+    {
+        title: "Population Distribution",
+        model: {"places":{"Clackmannanshire":true,"Dumfries & Galloway":false,"East Ayrshire":false,"East Lothian":false,"East Renfrewshire":true,"Eilean Siar":false,"Falkirk":true,"Fife":true,"Highland":false,"Inverclyde":true,"Midlothian":true,"Moray":false,"North Ayrshire":true,"Orkney Islands":false,"Perth & Kinross":false,"Scottish Borders":false,"Shetland Islands":false,"South Ayrshire":false,"South Lanarkshire":false,"Stirling":true,"Aberdeen City":true,"Aberdeenshire":true,"Argyll & Bute":false,"Edinburgh, City of":true,"Renfrewshire":true,"West Dunbartonshire":true,"West Lothian":true,"Angus":false,"Dundee City":true,"North Lanarkshire":true,"East Dunbartonshire":true,"Glasgow City":true},"plotType":"piechartCreate","dataSelected":{"Sum_Total_Population":true}},
+        notes: "These are the cities in which people live."
     },
     {
         title: "How the Money Votes",
@@ -108,10 +115,8 @@ var premade = [
         notes: "You can see here that the stronghold of yes voters was north and south of the central belt, which was more yes leaning than the majority of the country."
     },
     {
-        title: "",
-        model: {},
-        notes: ""
-    },
-
-
+        title: "Council Expenditure (£ per Capita)",
+        model: {"places":{"Clackmannanshire":true,"Dumfries & Galloway":true,"East Ayrshire":true,"East Lothian":true,"East Renfrewshire":true,"Eilean Siar":true,"Falkirk":true,"Fife":true,"Highland":true,"Inverclyde":true,"Midlothian":true,"Moray":true,"North Ayrshire":true,"Orkney Islands":true,"Perth & Kinross":true,"Scottish Borders":true,"Shetland Islands":true,"South Ayrshire":true,"South Lanarkshire":true,"Stirling":true,"Aberdeen City":true,"Aberdeenshire":true,"Argyll & Bute":true,"Edinburgh, City of":true,"Renfrewshire":true,"West Dunbartonshire":true,"West Lothian":true,"Angus":true,"Dundee City":true,"North Lanarkshire":true,"East Dunbartonshire":true,"Glasgow City":true},"plotType":"barchartCreate","dataSelected":{"Sum_Total_Population":false,"Average_Council_Expenditure_per_Capita":true}},
+        notes: "Look how uneven it is... Its sucks, doesn't it? If only they had more money, or less people."
+    }
 ]

@@ -201,7 +201,7 @@
         font-size: 16px;
         font-weight: bold;
     }
-    
+
     /* CSS helpers from http://pdenya.com/2013/08/08/vertical-space-in-bootstrap/ */
     .voffset {
         margin-top: 2px;
@@ -327,7 +327,7 @@
     }
 
     body {
-        overflow-y:scroll;
+        overflow-y: scroll;
     }
 
     text {
@@ -504,15 +504,15 @@
                 .prop('checked', false);
 
         clearSelectedOnMap();
-        
-        selectionModel  = {
+
+        selectionModel = {
             places: {},
             plotType: "",
             dataSelected: {}
         };
     }
 
-    function reportError (error) {
+    function reportError(error) {
         clearError();
         $("div#errorBar p").text(error);
         $("#errorBar").slideDown();
@@ -568,6 +568,13 @@
             loadPremade(number);
         });
 
+        $("#butplot img").click(function () {
+            var name = $(this).attr('data-value');
+            $("#selectorPlotContents").empty();
+            $("#selectorPlotContents").append('<div>' + name + '</div>');
+            selectionModel.plotType = name;
+        });
+
         $("input").click(function () {
             var $input = $(this);
             var name = $input.attr('id');
@@ -611,6 +618,7 @@
             <div id="initalErrorBar" class="hide-item alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>
+
                 <p></p>
             </div>
         </div>
@@ -625,7 +633,7 @@
                     <div class="block flexHorizontalCellWrap" style="margin: 0 auto; width: 100%; text-align: center;">
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
-                                <a class="thumbnail" >
+                                <a class="thumbnail">
                                     <img src="images/graph-1.png" data-value="0" alt="...">
                                 </a>
                             </div>
@@ -652,7 +660,7 @@
 
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
-                                <a class="thumbnail" >
+                                <a class="thumbnail">
                                     <img src="images/graph-5.png" data-value="4" alt="...">
                                 </a>
                             </div>
@@ -698,6 +706,7 @@
                 <div id="errorBar" class="hide-item alert alert-danger" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Error:</span>
+
                     <p>Missing Data! You haven't selected ... !</p>
                 </div>
             </div>
@@ -774,11 +783,14 @@
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Males">Male Population</td>
-                                <td><input type="checkbox" id="Sum_Working_Age_No_Qualifications">Individuals with no qualifications</td>
+                                <td><input type="checkbox" id="Sum_Working_Age_No_Qualifications">Individuals with no
+                                    qualifications
+                                </td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Females">Female Population</td>
-                                <td><input type="checkbox" id="Sum_Not_in_Full_Time_Education">Not in full time education
+                                <td><input type="checkbox" id="Sum_Not_in_Full_Time_Education">Not in full time
+                                    education
                                 </td>
                             </tr>
                             <tr>
@@ -791,12 +803,15 @@
                                 <td><input type="checkbox" id="Average_Pupil_Performance">Pupil Performance</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" id="Average_Council_Expenditure_per_Capita">Council Expenditure (per capita)</td>
+                                <td><input type="checkbox" id="Average_Council_Expenditure_per_Capita">Council
+                                    Expenditure (per capita)
+                                </td>
                                 <td><input type="checkbox" id="Sum_School_Pupil_Absences">Pupil Absences</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Income_Rank">Income (rank)</td>
-                                <td><input type="checkbox" id="Percentage_Unqualified">Adults with no Qualifications (%)</td>
+                                <td><input type="checkbox" id="Percentage_Unqualified">Adults with no Qualifications (%)
+                                </td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Income_Score">Income (score)</td>
@@ -830,39 +845,44 @@
 
                 <div id="butplot" class="hide-item">
                     <div class="container row block">
-                        <div class="col-lg-3"></div>
-                        <div class="col-lg-6">
-                        <div class="center-block" style="">
-                            <button type="button" id="piechartCreate" value="piechart"
-                                    class="btn btn-default button-plot plotSelector">
-                                <div class="image1"></div>
-                            </button>
-                            ​
-                            <button type="button" id="barchartCreate" value="barchart"
-                                    class="btn btn-default button-plot plotSelector">
-                                <div class="image2"></div>
-                            </button>
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                            <div class="center-block" style="">
+                                <div class="row">
+                                    <div class="col-xs-3 col-md-4">
+                                        <a class="thumbnail">
+                                            <img src="images/graph-1.png" data-value="parallelcoordinatesCreate"
+                                                 alt="...">
+                                        </a>
+                                    </div>
 
-                            <button type="button" id="scatterplotCreate" value="scatterplot"
-                                    class="btn btn-default button-plot plotSelector">
-                                <div class="image3"></div>
-                            </button>
+                                    <div class="col-xs-3 col-md-4">
+                                        <a class="thumbnail">
+                                            <img src="images/graph-2.png" data-value="mapplotCreate" alt="...">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
 
-                            <button type="button" id="parallelcoordinatesCreate" value="parallelcoordinates"
-                                    class="btn btn-default button-plot plotSelector">
-                                <div class="image3"></div>
-                            </button>
-
-                            <button type="button" id="mapplotCreate" value="mapplot"
-                                    class="btn btn-default button-plot plotSelector">
-                                <div class="image4"></div>
-                            </button>
-
-                            <button type="button" id="zeroedMapplotCreate" value="zeroedMapplotCreate"
-                                    class="btn btn-default button-plot plotSelector">
-                                <div class="image4"></div>
-                            </button>
-                        </div>
+                                    <div class="col-xs-3 col-md-4">
+                                        <a class="thumbnail">
+                                            <img src="images/graph-3.png" data-value="scatterplotCreate" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-3 col-md-4">
+                                        <a class="thumbnail">
+                                            <img src="images/graph-4.png" data-value="barchartCreate" alt="...">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-3 col-md-4">
+                                        <a class="thumbnail">
+                                            <img src="images/graph-5.png" data-value="piechartCreate" alt="...">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-3"></div>
                     </div>
@@ -874,13 +894,23 @@
              style="background-color: CCFFFF; height: 100%">
             <div id="plotCreationProgress" class="block-data-right">
                 <div id="selector"><p class="block-data-right-header">Selected</p>
-                    <div id="selectorData" class="voffset"><p class="block-data-right-category">Data<p>
+
+                    <div id="selectorData" class="voffset"><p class="block-data-right-category">Data
+
+                        <p>
+
                         <div id="selectorDataContents"></div>
                     </div>
-                    <div id="selectorPlot" class="voffset"><p class="block-data-right-category">Plot<p>
+                    <div id="selectorPlot" class="voffset"><p class="block-data-right-category">Plot
+
+                        <p>
+
                         <div id="selectorPlotContents"></div>
                     </div>
-                    <div id="selectorPlaces" class="voffset"><p class="block-data-right-category">Places<p>
+                    <div id="selectorPlaces" class="voffset"><p class="block-data-right-category">Places
+
+                        <p>
+
                         <div id="selectorPlacesContents"></div>
                     </div>
                 </div>
