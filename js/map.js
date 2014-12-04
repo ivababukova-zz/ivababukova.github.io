@@ -280,7 +280,7 @@ var DataColumnsGroupings = {
         ['Minimum_Total_Population', 'Maximum_Total_Population', 'Average_Total_Population'],
         ['Minimum_Population', 'Maximum_Population', 'Average_Population'],
         ['Minimum_Males', 'Maximum_Males', 'Average_Males'],
-        ['Minimum_Female', 'Maximum_Female', 'Average_Female'],
+        ['Minimum_Females', 'Maximum_Females', 'Average_Females'],
         ['Minimum_Area_km', 'Maximum_Area_km', 'Average_Area_km'],
         ['Minimum_Population_Density', 'Maximum_Population_Density', 'Average_Population_Density'],
         ['Minimum_Council_Expenditure_per_Capita', 'Maximum_Council_Expenditure_per_Capita', 'Average_Council_Expenditure_per_Capita'],

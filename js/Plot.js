@@ -94,16 +94,16 @@ function createParallelCoordinatesChart(destinationDiv, columns, regions) {
     var chartData = [];
     var chosen = filterColumns(columns); //["Minimum_Registered_Voters", "Maximum_Registered_Voters"];
 
-    var names = [];
+    var columnNames = [];
     for (var i in chosen) {
-        names.push(DataTitleToModelTitle[chosen[i]]);
+        columnNames.push(DataTitleToModelTitle[chosen[i]]);
     }
 
     for (var i = 0; i < data.length; i++) {
-      chartData.push({"name": regions[data[i]["City"]]}); 
+      chartData.push({"name": data[i]["City"]});
       
       for (var j = 0; j < chosen.length; j++)
-        chartData[i][names[j]] = data[i][chosen[j]];
+        chartData[i][chosen[j]] = data[i][chosen[j]];
     }
 
     console.log(chartData);
@@ -198,29 +198,34 @@ var DataTitleToModelTitle = {
         "Sum_Crime_2012_Count": "Crimes Committed",
         "Average_Crimes_per_10000": "Crimes per 10,000",
 
-        "Sum_Number_of_Votes": "Number of Votes",
-        "Sum_Yes_Votes": "Yes votes",
-        "Sum_No_Votes": "No votes",
-        "Sum_Rejected_Papers": "Rejected Votes",
+        "Average_Number_of_Votes": "Number of Votes",
+        "Average_Yes_Votes": "Yes votes",
+        "Average_No_Votes": "No votes",
+        "Average_Rejected_Papers": "Rejected Votes",
+        "Yes_Percentage": "Yes (%)",
+        "No_Percentage": "No (%)",
+        "No_Minus_Yes_Votes": "No-Yes (Δ)",
+        "Percentage_Voter_Turnout": "Voter Turnout (%)",
 
         "Sum_Total_Population": "Population",
-        "Sum_Males": "Male Population",
-        "Sum_Females": "Female Population",
+        "Average_Males": "Male Population",
+        "Average_Females": "Female Population",
         "Sum_Area_km": "Average Area (km2)",
         "Sum_Population_Density": "Population Density",
         "Average_Council_Expenditure_per_Capita": "Council Expenditure (per capita)",
-        "Sum_Income_Rank": "Income (rank)",
-        "Sum_Income_Score": "Income (score)",
+        "Average_Income_Rank": "Income (rank)",
+        "Average_Income_Score": "Income (score)",
         "Sum_Number_of_Deprived": "Number of Deprived",
         "Sum_Registered_Voters": "Registered Voters",
 
         "Average_Education_Score_2012": "Education (score)",
         "Average_Education_Rank_2012": "Education (rank)",
-        "Sum_Working_Age_No_Qualifications": "Individuals with no qualifications",
+        "Sum_Working_Age_No_Qualifications": "Adults with no qualifications",
         "Sum_Not_in_Full_Time_Education": "Not in full time education",
         "Sum_Entering_Higher_Education": "Entering Secondary School",
         "Average_Pupil_Performance": "Pupil Performance",
-        "Sum_School_Pupil_Absences": "Pupil Absences"
+        "Sum_School_Pupil_Absences": "Pupil Absences",
+        "Percentage_Unqualified": "Adults with no Qualifications (%)"
 };
 
 var ModelTitleToDataTitle = {};

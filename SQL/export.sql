@@ -1,5 +1,5 @@
 select
-  City,
+	City,
     min(Education_Skills_and_Training_domain_2012_score1) as Minimum_Education_Score_2012,
     max(Education_Skills_and_Training_domain_2012_score1) as Maximum_Education_Score_2012,
     avg(Education_Skills_and_Training_domain_2012_score1) as Average_Education_Score_2012,
@@ -72,9 +72,9 @@ select
     max(Estimated_Males_2013) as Maximum_Males,
     avg(Estimated_Males_2013) as Average_Males,
     sum(Estimated_Males_2013) as Sum_Males,
-    min(Estimated_Females_2013) as Minimum_Female,
-    max(Estimated_Females_2013) as Maximum_Female,
-    avg(Estimated_Females_2013) as Average_Female,
+    min(Estimated_Females_2013) as Minimum_Females,
+    max(Estimated_Females_2013) as Maximum_Females,
+    avg(Estimated_Females_2013) as Average_Females,
     sum(Estimated_Females_2013) as Sum_Females,
     min(Area_square_km) as Minimum_Area_km,
     max(Area_square_km) as Maximum_Area_km,
@@ -103,7 +103,12 @@ select
     min(Crimes_per_10_000) as Minimum_Crimes_per_10000,
     max(Crimes_per_10_000) as Maximum_Crimes_per_10000,
     avg(Crimes_per_10_000) as Average_Crimes_per_10000,
-    sum(Crimes_per_10_000) as Sum_Crimes_per_10000
+    sum(Crimes_per_10_000) as Sum_Crimes_per_10000,
+    (avg(Yes_Votes) / avg(Number_of_Votes)) * 100 as Yes_Percentage,
+    (avg(No_Votes) / avg(Yes_Votes)) * 100 as No_Percentage,
+	(avg(No_Votes) - avg(Yes_Votes)) as No_Minus_Yes_Votes,
+    (sum(Working_age_no_qualifications_2001_2) / sum(Total_Population__SAPE_2010)) * 100 as Percentage_Unqualified,
+	(avg(Electorate_Referendum_2014) / sum(Total_Population__SAPE_2010)) * 100 as Percentage_Voter_Turnout
 
 from
   part2_overall_ranks_and_domain_ranks
@@ -113,6 +118,8 @@ from
   part3_income_domain
 	natural left join
   part9_crime_domain
+	natural left join
+  income_data
     left join
   referendum2014
     on(Local_Authority_Name=City)

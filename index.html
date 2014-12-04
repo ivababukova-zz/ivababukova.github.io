@@ -463,10 +463,20 @@
                     return false;
                 }
 
-
                 container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
                 createMapPlot(container, selection.dataSelected, selection.places);
                 break;
+
+            case "zeroedMapplotCreate":
+                if (columns.length != 1) {
+                    reportError("Too many data columns selected, only 1 is needed");
+                    return false;
+                }
+
+                container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
+                createMapPlot(container, selection.dataSelected, selection.places, 0);
+                break;
+
             default:
                 reportError("No plot selected! Select one to continue.");
                 return false;
@@ -643,22 +653,22 @@
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
                                 <a class="thumbnail" >
-                                    <img src="images/graph-1.png" data-value="4" alt="...">
+                                    <img src="images/graph-5.png" data-value="4" alt="...">
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a class="thumbnail" data-value="1">
-                                    <img src="holder.js/100%x180" data-value="5" alt="...">
+                                    <img src="images/graph-6.png" data-value="5" alt="...">
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a class="thumbnail" data-value="2">
-                                    <img src="holder.js/100%x180" data-value="6" alt="...">
+                                    <img src="images/graph-7.png" data-value="6" alt="...">
                                 </a>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <a class="thumbnail" data-value="3">
-                                    <img src="holder.js/100%x180" data-value="7" alt="...">
+                                    <img src="images/graph-8.png" data-value="7" alt="...">
                                 </a>
                             </div>
                         </div>
@@ -732,6 +742,22 @@
                                 <td></td>
                                 <td><input type="checkbox" id="Average_Rejected_Papers">Rejected Votes</td>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="checkbox" id="Yes_Percentage">Yes (%)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="checkbox" id="No_Percentage">No (%)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="checkbox" id="No_Minus_Yes_Votes">No-Yes (Δ)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="checkbox" id="Percentage_Voter_Turnout">Voter Turnout (%)</td>
+                            </tr>
 
                             <tr>
                                 <th>Demographic</th>
@@ -747,11 +773,11 @@
                                 <td><input type="checkbox" id="Average_Education_Rank_2012">Education (rank)</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" id="Sum_Males">Male Population</td>
+                                <td><input type="checkbox" id="Average_Males">Male Population</td>
                                 <td><input type="checkbox" id="Sum_Working_Age_No_Qualifications">Individuals with no qualifications</td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" id="Sum_Females">Female Population</td>
+                                <td><input type="checkbox" id="Average_Females">Female Population</td>
                                 <td><input type="checkbox" id="Sum_Not_in_Full_Time_Education">Not in full time education
                                 </td>
                             </tr>
@@ -770,6 +796,7 @@
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Income_Rank">Income (rank)</td>
+                                <td><input type="checkbox" id="Percentage_Unqualified">Adults with no Qualifications (%)</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" id="Average_Income_Score">Income (score)</td>
@@ -827,6 +854,11 @@
                             </button>
 
                             <button type="button" id="mapplotCreate" value="mapplot"
+                                    class="btn btn-default button-plot plotSelector">
+                                <div class="image4"></div>
+                            </button>
+
+                            <button type="button" id="zeroedMapplotCreate" value="zeroedMapplotCreate"
                                     class="btn btn-default button-plot plotSelector">
                                 <div class="image4"></div>
                             </button>
