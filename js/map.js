@@ -160,20 +160,19 @@ function createMapPlot(destinationDiv, regionDataMapping, selected, onHover, mid
     return mapObj;
 }
 
-
-
 d3.json("data/osod_sco_locauth.topojson", function(error, map) {
 
     if (error) {
         return console.error(error);
     }
+
     regionsMap = topojson.feature(map, map.objects.lad);
     createMap("#mapBox", regionsMap);
 });
 
 //    d3.select("selectall").on("click", toggleAll);
 
-// This maps city names from the geographic data to the provided dataset
+// This maps city names from the grographic data to the provded dataset
 var GeoToDataNameMapping = {
     "Aberdeen City": "Aberdeen City",
     "Aberdeenshire": "Aberdeenshire",
@@ -244,7 +243,6 @@ var DataToGeoNameMapping = {
     "West Dunbartonshire": "West Dunbartonshire",
     "West Lothian": "West Lothian"
 };
-
 
 var DataColumnsGroupings = {
     education: [
