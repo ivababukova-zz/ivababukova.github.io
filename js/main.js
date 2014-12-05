@@ -29,7 +29,251 @@ function createPlotSpace(parentDiv, title, note) {
     return out;
 }
 
-d3.createPlotSpace = createPlotSpace;
+var selected = [];
+
+var selectionModel = {
+    places: {},
+    plotType: "",
+    dataSelected: {}
+};
+
+var inputData;
+
+function updatePlotSelected() {
+    $("#selector").find('#selectorPlacesContents').empty();
+
+    for (var city in selectionModel.places) {
+        if (selectionModel.places[city]) {
+            $("#selector").find('#selectorPlacesContents').append($('<div>' + city + '</div>'));
+        }
+    }
+}
+
+
+var data = {};
+d3.json("data/referendum_data.json",
+    function (blob) {
+        data = blob;
+    }
+);
+
+function createPlotNoteContainer(title, note) {
+    return createPlotSpace(d3.select("#plotdisplay"), title, note)
+        .select(".plotContainer")
+        .append("div")
+        .attr("class", "flexCenterAlign")
+        .attr("style", "height: 100vh;");
+}
+
+function addPlot(selection, note, title) {
+    var columns = filterColumns(selection.dataSelected);
+    var container;
+
+    if ($("#NoPlotDefined").length) {
+        $("#NoPlotDefined").remove();
+    }
+
+    if (columns.length == 0) {
+        reportError("No data columns selected! select a column to continue.");
+        return false;
+    }
+
+    if (filterColumns(selection.places).length == 0) {
+        reportError("No locations selected, select some, or all locations to continue.");
+        return false;
+    }
+
+    note = note || "";
+
+    switch (selection.plotType) {
+        case "piechartCreate":
+            if (columns.length != 1) {
+                reportError("Incorrect number of data columns selected, only 1 is needed");
+                return false;
+            }
+
+            container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
+            createPieChart(container, selection.dataSelected, selection.places);
+            break;
+        case "barchartCreate":
+            if (columns.length != 1) {
+                reportError("Incorrect number of data columns selected, only 1 is needed");
+                return false;
+            }
+
+            container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
+            createBarChart(container, selection.dataSelected, selection.places);
+            break;
+
+        case "scatterplotCreate":
+            if (columns.length != 2) {
+                reportError("Incorrect number of data columns selected, 2 are needed.");
+                return false;
+            }
+
+            container = createPlotNoteContainer(title || (columns[0] + " and " + columns[1]), note);
+            createScatterPlot(container, selection.dataSelected, selection.places);
+            break;
+        case "parallelcoordinatesCreate":
+            if (columns.length == 0) {
+                reportError("Incorrect number of data columns selected, at least 1 is needed");
+                return false;
+            }
+
+            var names = filterColumns(selection.dataSelected);
+            var text = DataTitleToModelTitle[names[0]];
+            for (var i = 1; i < names.length; i++) {
+                text += " and " + DataTitleToModelTitle[names[i]];
+            }
+            container = createPlotNoteContainer(title || text, note);
+            createParallelCoordinatesChart(container, selection.dataSelected, selection.places);
+            break;
+        case "mapplotCreate":
+            if (columns.length != 1) {
+                reportError("Incorrect number of data columns selected, only 1 is needed");
+                return false;
+            }
+
+            container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
+            createMapPlot(container, selection.dataSelected, selection.places);
+            break;
+
+        case "zeroedMapplotCreate":
+            if (columns.length != 1) {
+                reportError("Incorrect number of data columns selected, only 1 is needed");
+                return false;
+            }
+
+            container = createPlotNoteContainer(title || DataTitleToModelTitle[columns[0]], note);
+            createMapPlot(container, selection.dataSelected, selection.places, 0);
+            break;
+
+        default:
+            reportError("No plot selected! Select one to continue.");
+            return false;
+            break;
+    }
+
+    console.log(JSON.stringify(selectionModel));
+    return true;
+}
+
+function loadPremade(index) {
+    var title = premade[index].title;
+    var model = premade[index].model;
+    var notes = premade[index].notes;
+    addPlot(model, notes, title);
+
+    $('html, body').animate({
+        scrollTop: $('#plot').offset().top
+    }, 1000);
+}
+
+function clearSelection() {
+    $("#tabledata")
+        .select("input")
+        .prop('checked', false);
+
+    clearSelectedOnMap();
+
+    selectionModel = {
+        places: {},
+        plotType: "",
+        dataSelected: {}
+    };
+}
+
+function reportError(error) {
+    clearError();
+    $("div#errorBar p").text(error);
+    $("#errorBar").slideDown();
+}
+
+function clearError() {
+    $("#errorBar").slideUp();
+    $("#errorBar p").empty();
+}
+
+$(document).ready(function () {
+
+    $("#tabledata").slideDown(500);
+
+    $("#more").click(function () {
+        $("#morebut").slideToggle(500);
+    });
+
+    $("#choosePlot").click(function () {
+        $("#butplot").slideDown(500);
+        $("#tabledata").slideUp(500);
+        $("#butLocation").slideUp(500);
+    });
+
+    $("#chooseData").click(function () {
+        $("#butplot").slideUp(500);
+        $("#tabledata").slideDown(500);
+        $("#butLocation").slideUp(500);
+    });
+
+    $("#chooseLocation").click(function () {
+        $("#butplot").slideUp(500);
+        $("#tabledata").slideUp(500);
+        $("#butLocation").slideDown(500);
+    });
+
+    $("#finishPlotCreation").click(function () {
+        if (addPlot(selectionModel)) {
+            $('html, body').animate({
+                scrollTop: $('#plot').offset().top
+            }, 1000);
+        }
+    });
+
+    $('#create').click(function () {
+        $('html, body').animate({
+            scrollTop: $('#menu').offset().top
+        }, 1000);
+    });
+
+    $("#premadeSelector img").click(function () {
+        var number = $(this).attr('data-value');
+        loadPremade(number);
+    });
+
+    $("#butplot img").click(function () {
+        var name = $(this).attr('data-value');
+        $("#selectorPlotContents").empty();
+        $("#selectorPlotContents").append('<div>' + name + '</div>');
+        selectionModel.plotType = name;
+    });
+
+    $("input").click(function () {
+        var $input = $(this);
+        var name = $input.attr('id');
+
+        if ($input.is(":checked")) {
+            $("#selector").find('#selectorData').append($('<div>' + DataTitleToModelTitle[name] + '</div>'));
+            selectionModel.dataSelected[name] = true;
+        }
+
+        if (!$input.is(':checked')) {
+            $("#selector").find('#selectorData').find('div').remove(":contains('" + DataTitleToModelTitle[name] + "')");
+            selectionModel.dataSelected[name] = false;
+        }
+
+        if ($("#selectorData > div").length != 0) {
+            $("#selectorData").slideDown(500);
+        } else if ($("#selectorData > div").length == 0) {
+            $("#selectorData").slideToggle(500);
+        }
+    }).change();
+
+    $(".plotSelector").click(function (event) {
+        var name = $(this).attr("id");
+        $("#selectorPlotContents").empty();
+        $("#selectorPlotContents").append('<div>' + name + '</div>');
+        selectionModel.plotType = name;
+    });
+});
 
 var premade = [
     {
