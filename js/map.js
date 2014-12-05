@@ -17,7 +17,7 @@ function updateSelectedColour(name) {
     d3.select("#" + name).style('fill', selectedOnMap[name] == true? "#88FF88" : "#BBBBBB");
 }
 
-function clearSelected() {
+function clearSelectedOnMap() {
     for (var key in GeoToDataMapping) {
         setSelected(getIdName(key), false);
     }
@@ -27,7 +27,7 @@ function setSelected(name, state) {
     selectedOnMap[name] = state;
     for (var key in GeoToDataNameMapping) {
         if (getIdName(key) == name) {
-            selectionModel.plot[GeoToDataNameMapping[key]] = state;
+            selectionModel.places[GeoToDataNameMapping[key]] = state;
             updateSelectedColour(name);
         }
     }
@@ -50,14 +50,15 @@ var height = 17 * size;
 
 var regionsMap;
 
-function createMap(containerId, regions) {
+function createMap(container, regions) {
 
     var mapObject = {
         svg: "",
         regions: ""
     };
 
-    var svg = d3.select(containerId).append("svg")
+    var svg = container
+        .append("svg")
         .attr("width", width)
         .attr("height", height);
 
@@ -90,6 +91,10 @@ function createMap(containerId, regions) {
         .style("stroke", "#000000")
         .style("stroke-width", "0.1px");
 
+    path
+        .append("svg:title")
+        .text(function(d, i) { return d.properties.name });
+
     region
         .each(function(d, i) { selectedOnMap[getIdName(d.properties.name)] = false });
 
@@ -104,27 +109,36 @@ function createMap(containerId, regions) {
     return mapObject;
 }
 
-function createMapPlot(destinationDiv, regionDataMapping, selected, onHover, midPoint) {
-    var mapObj = createMap(destinationDiv, regionsMap);
+function createMapPlot(container, columns, places, midPoint) {
 
+    var column = container
+        .append("div")
+        .attr("class", "row");
+
+    column
+        .append("div")
+        .attr("class", "col-md-3");
+
+    var mapObj = createMap(column, regionsMap);
+    var chosen = filterColumns(columns)[0];
+    var values = {};
 
     // Calculate min & max
     var minVal = 10000000;
     var maxVal = -10000000;
-    for (var key in regionDataMapping) {
-        var value = regionDataMapping[key];
+    for (var i in data) {
+        if (places[data[i]["City"]]) {
+            var value = data[i][chosen];
+            values[data[i]["City"]] = value;
 
-        if (selected[DataToGeoNameMapping[getIdName(regionDataMapping[key])]]) {
             if (value > maxVal) {
                 maxVal = value;
             }
 
-            if (value < maxColour) {
+            if (value < minVal) {
                 minVal = value;
             }
         }
-
-
     }
 
     // Adjust them to get the correct midpoint.
@@ -148,12 +162,11 @@ function createMapPlot(destinationDiv, regionDataMapping, selected, onHover, mid
         .domain([minVal, maxVal])
         .range(colours);
 
-    // Recolour the map.
     mapObj
         .regions
         .style("fill", function(d) {
             var nameInDataSet = GeoToDataNameMapping[d.properties.name];
-            var value = regionDataMapping[nameInDataSet];
+            var value = values[nameInDataSet];
             return colour(value);
         });
 
@@ -166,8 +179,18 @@ d3.json("data/osod_sco_locauth.topojson", function(error, map) {
         return console.error(error);
     }
 
+    var div = d3.select("#mapBox");
     regionsMap = topojson.feature(map, map.objects.lad);
-    createMap("#mapBox", regionsMap);
+    createMap(div, regionsMap, function (d) {
+        d3.find("mapHovering")
+            .clear();
+
+        d3.select("#mapHovering")
+            .enter().append("text")
+            .text(function(d) {return d.properties.name;})
+            .attr("x", function(d) {return x(d.x);})
+            .attr("y", function (d) {return y(d.y);});
+    });
 });
 
 //    d3.select("selectall").on("click", toggleAll);
@@ -257,7 +280,7 @@ var DataColumnsGroupings = {
         ['Minimum_Total_Population', 'Maximum_Total_Population', 'Average_Total_Population'],
         ['Minimum_Population', 'Maximum_Population', 'Average_Population'],
         ['Minimum_Males', 'Maximum_Males', 'Average_Males'],
-        ['Minimum_Female', 'Maximum_Female', 'Average_Female'],
+        ['Minimum_Females', 'Maximum_Females', 'Average_Females'],
         ['Minimum_Area_km', 'Maximum_Area_km', 'Average_Area_km'],
         ['Minimum_Population_Density', 'Maximum_Population_Density', 'Average_Population_Density'],
         ['Minimum_Council_Expenditure_per_Capita', 'Maximum_Council_Expenditure_per_Capita', 'Average_Council_Expenditure_per_Capita'],
